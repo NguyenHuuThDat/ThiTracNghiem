@@ -75,4 +75,25 @@ class DeThiModel extends DB
         shuffle($data_cd);
         return $data_cd;
     }
+
+    public function create_chuongdethi($made, $chuong)
+    {
+        $valid = true;
+        foreach ($chuong as $machuong) {
+            $sql = "INSERT INTO `dethitudong`(`made`, `machuong`) VALUES ('$made','$machuong')";
+            $result = mysqli_query($this->con, $sql);
+            if (!$result) $valid = false;
+        }
+        return $valid;
+    }
+
+    public function update_chuongdethi($made, $chuong)
+    {
+        $valid = true;
+        $sql = "DELETE FROM `dethitudong` WHERE `made`='$made'";
+        $result_del = mysqli_query($this->con, $sql);
+        if ($result_del) $result_update = $this->create_chuongdethi($made, $chuong);
+        else $valid = false;
+        return $valid;
+    }
 }
