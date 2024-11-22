@@ -140,4 +140,92 @@ class DeThiModel extends DB
         if (!$result) $valid = false;
         return $valid;
     }
+
+    // Lấy đề thi mà người dùng tạo
+    public function getAll($nguoitao)
+    {
+        $sql = "SELECT dethi.made, tende, monhoc.tenmonhoc, thoigianbatdau, thoigianketthuc, nhom.tennhom, namhoc, hocky
+        FROM dethi, monhoc, giaodethi, nhom
+        WHERE dethi.monthi = monhoc.mamonhoc AND dethi.made = giaodethi.made AND nhom.manhom = giaodethi.manhom AND nguoitao = $nguoitao AND dethi.trangthai = 1
+        ORDER BY dethi.made DESC";
+        $result = mysqli_query($this->con, $sql);
+        $rows = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $made = $row['made'];
+            $index = array_search($made, array_column($rows, 'made'));
+            if ($index === false) {
+                $item = [
+                    "made" => $made,
+                    "tende" => $row['tende'],
+                    "thoigianbatdau" => date_format(date_create($row['thoigianbatdau']), "H:i d/m/Y"),
+                    "thoigianketthuc" => date_format(date_create($row['thoigianketthuc']), "H:i d/m/Y"),
+                    "tenmonhoc" => $row['tenmonhoc'],
+                    "namhoc" => $row['namhoc'],
+                    "hocky" => $row['hocky'],
+                    "nhom" => [$row['tennhom']]
+                ];
+                array_push($rows, $item);
+            } else {
+                array_push($rows[$index]["nhom"], $row['tennhom']);
+            }
+        }
+        return $rows;
+    }
+
+    // Lấy chi tiết đề thi
+    public function getById($made)
+    {
+        $sql_dethi = "SELECT dethi.*, monhoc.tenmonhoc FROM dethi, monhoc WHERE made = $made AND dethi.monthi = monhoc.mamonhoc";
+        $result_dethi = mysqli_query($this->con, $sql_dethi);
+        $dethi = mysqli_fetch_assoc($result_dethi);
+        if ($dethi != null) {
+            $sql_giaodethi = "SELECT manhom FROM giaodethi WHERE made = $made";
+            $sql_dethitudong = "SELECT machuong FROM dethitudong WHERE made = $made";
+            $result_giaodethi = mysqli_query($this->con, $sql_giaodethi);
+            $result_dethitudong = mysqli_query($this->con, $sql_dethitudong);
+            $dethi['chuong'] = array();
+            while ($row = mysqli_fetch_assoc($result_dethitudong)) {
+                $dethi['chuong'][] = $row['machuong'];
+            }
+            $dethi['nhom'] = array();
+            while ($row = mysqli_fetch_assoc($result_giaodethi)) {
+                $dethi['nhom'][] = $row['manhom'];
+            }
+        }
+        return $dethi;
+    }
+
+    // Lấy thông tin cơ bản của đề thi ()
+    public function getInfoTestBasic($made)
+    {
+        $sql_dethi = "SELECT dethi.made, dethi.tende, dethi.thoigiantao,dethi.loaide,dethi.nguoitao,monhoc.mamonhoc, monhoc.tenmonhoc FROM dethi, monhoc WHERE made = $made AND dethi.monthi = monhoc.mamonhoc";
+        $result_dethi = mysqli_query($this->con, $sql_dethi);
+        $dethi = mysqli_fetch_assoc($result_dethi);
+        if ($dethi != null) {
+            $sql_giaodethi = "SELECT giaodethi.manhom, nhom.tennhom FROM giaodethi, nhom WHERE made = $made AND giaodethi.manhom = nhom.manhom";
+            $result_giaodethi = mysqli_query($this->con, $sql_giaodethi);
+            $dethi['nhom'] = array();
+            while ($row = mysqli_fetch_assoc($result_giaodethi)) {
+                $dethi['nhom'][] = $row;
+            }
+        }
+        return $dethi;
+    }
+
+    // Lấy đề thi của nhóm học phần
+    public function getListTestGroup($manhom)
+    {
+        $sql = "SELECT dethi.made, dethi.tende, dethi.thoigianbatdau, dethi.thoigianketthuc
+        FROM giaodethi, dethi
+        WHERE manhom = '$manhom' AND giaodethi.made = dethi.made ORDER BY dethi.made DESC";
+        $result = mysqli_query($this->con, $sql);
+        $rows = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $row['thoigianbatdau'] = date_format(date_create($row['thoigianbatdau']), "H:i d/m/Y");
+            $row['thoigianketthuc'] = date_format(date_create($row['thoigianketthuc']), "H:i d/m/Y");
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
 }
