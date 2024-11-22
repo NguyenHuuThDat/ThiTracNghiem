@@ -96,4 +96,48 @@ class DeThiModel extends DB
         else $valid = false;
         return $valid;
     }
+
+    public function create_giaodethi($made, $nhom)
+    {
+        $valid = true;
+        foreach ($nhom as $manhom) {
+            $sql = "INSERT INTO `giaodethi`(`made`, `manhom`) VALUES ('$made','$manhom')";
+            $result = mysqli_query($this->con, $sql);
+            if (!$result) $valid = false;
+        }
+        return $valid;
+    }
+
+    public function update_giaodethi($made, $nhom)
+    {
+        $valid = true;
+        $sql = "DELETE FROM `giaodethi` WHERE `made`='$made'";
+        $result_del = mysqli_query($this->con, $sql);
+        if ($result_del) $result_update = $this->create_giaodethi($made, $nhom);
+        else $valid = false;
+        return $valid;
+    }
+
+    public function update($made, $monthi, $tende, $thoigianthi, $thoigianbatdau, $thoigianketthuc, $hienthibailam, $xemdiemthi, $xemdapan, $troncauhoi, $trondapan, $nopbaichuyentab, $loaide, $socaude, $socautb, $socaukho, $chuong, $nhom)
+    {
+        $valid = true;
+        $sql = "UPDATE `dethi` SET `monthi`='$monthi',`tende`='$tende',`thoigianthi`='$thoigianthi',`thoigianbatdau`='$thoigianbatdau',`thoigianketthuc`='$thoigianketthuc',`hienthibailam`='$hienthibailam',`xemdiemthi`='$xemdiemthi',`xemdapan`='$xemdapan',`troncauhoi`='$troncauhoi',`trondapan`='$trondapan',`nopbaichuyentab`='$nopbaichuyentab',`loaide`='$loaide',`socaude`='$socaude',`socautb`='$socautb',`socaukho`='$socaukho' WHERE `made`='$made'";
+        $result = mysqli_query($this->con, $sql);
+        if ($result) {
+            // Một đề thi giao cho nhiều nhóm
+            $result = $this->update_giaodethi($made, $nhom);
+            // Một đề thi thì có nhiều chương
+            $result = $this->update_chuongdethi($made, $chuong);
+        } else $valid = false;
+        return $valid;
+    }
+
+    public function delete($madethi)
+    {
+        $valid = true;
+        $sql = "UPDATE `dethi` SET `trangthai`= 0 WHERE `made` = $madethi";
+        $result = mysqli_query($this->con, $sql);
+        if (!$result) $valid = false;
+        return $valid;
+    }
 }
