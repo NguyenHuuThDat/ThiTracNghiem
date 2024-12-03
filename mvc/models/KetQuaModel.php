@@ -33,6 +33,18 @@ class KetQuaModel extends DB{
         return mysqli_fetch_assoc($result);
     }
 
+    public function socaudung($listCauTraLoi){
+        $socaudung = 0;
+        foreach($listCauTraLoi as $tl){
+            $macauhoi = $tl['macauhoi'];
+            $cautraloi = $tl['cautraloi'];
+            $sql = "SELECT * FROM cautraloi ctl WHERE ctl.macauhoi = '$macauhoi' AND ctl.macautl = '$cautraloi' AND ctl.ladapan = 1";
+            $result = mysqli_query($this->con,$sql);
+            if(mysqli_num_rows($result)>0) $socaudung++;
+        }
+        return $socaudung;
+    }
+
     public function submit($made,$nguoidung,$list,$thoigian){
         $sql_ketqua = "Select * from ketqua where made = '$made' and manguoidung = '$nguoidung'";
         $result_ketqua = mysqli_query($this->con,$sql_ketqua);
@@ -75,6 +87,117 @@ class KetQuaModel extends DB{
             $rows[] = $row;
         }
         return $rows;
+    }
+
+    public function getMarkOfAllTest($manhom)
+    {
+        // Lấy danh sách đề thi
+        $sql_giaodethi = "SELECT dethi.made,tende FROM giaodethi,dethi WHERE manhom = $manhom AND giaodethi.made = dethi.made";
+        $result_giaodethi = mysqli_query($this->con,$sql_giaodethi);
+        $arr_dethi = array();
+        while($row = mysqli_fetch_assoc($result_giaodethi)) {
+            $arr_dethi[] = $row;
+        }
+
+        // Lấy danh sách sinh viên
+        $sql_sinhvien = "SELECT id,hoten FROM nguoidung, chitietnhom WHERE nguoidung.id = chitietnhom.manguoidung AND chitietnhom.manhom = $manhom";
+        $result_sinhvien = mysqli_query($this->con,$sql_sinhvien);
+        $arr_sinhvien = array();
+        while($row = mysqli_fetch_assoc($result_sinhvien)) {
+            $arr_sinhvien[] = $row;
+        }
+
+        // Lấy bảng điểm
+        $arr_ketqua = array();
+        foreach($arr_dethi as $dethi) {
+            $arr_ketqua[$dethi['made']] = $this->getMarkOfOneTest($manhom,$dethi['made']);
+        }
+
+        // Xử lý header 
+        $header = array("Mã sinh viên", "Tên sinh viên");
+        foreach ($arr_dethi as $dethi) $header[] = $dethi['tende'];
+
+        // Xử lý mảng
+        $arr_result = array($header);
+        for($i=0;$i<count($arr_sinhvien);$i++) {
+            $row = array($arr_sinhvien[$i]['id'],$arr_sinhvien[$i]['hoten']);
+            for($j = 0; $j < count($arr_dethi); $j++) {
+                array_push($row,$arr_ketqua[$arr_dethi[$j]['made']][$i]['diemthi']);
+            }
+            $arr_result[] = $row;
+        }
+
+        return $arr_result;
+    } 
+
+    public function getMarkOfOneTest($manhom,$made)
+    {
+        $sql = "SELECT DISTINCT giaodethi.made,chitietnhom.manguoidung,ketqua.diemthi
+        FROM giaodethi, chitietnhom LEFT JOIN ketqua ON chitietnhom.manguoidung = ketqua.manguoidung AND ketqua.made = $made 
+        WHERE giaodethi.manhom = chitietnhom.manhom AND giaodethi.manhom = $manhom AND giaodethi.made = $made";
+        $result = mysqli_query($this->con,$sql);
+        $rows = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    // Lấy thông tin đề thi, kết quả của sinh viên để xuất file PDF
+    public function getInfoPrintPdf($makq)
+    {
+        $sql = "SELECT DISTINCT ketqua.made, tende, tenmonhoc, mamonhoc, thoigianthi, manguoidung, hoten, socaudung,(socaude + socautb + socaukho) AS tongsocauhoi , diemthi
+        FROM chitietketqua, ketqua, dethi, monhoc, nguoidung
+        WHERE chitietketqua.makq = '$makq' AND chitietketqua.makq = ketqua.makq AND ketqua.manguoidung = nguoidung.id AND ketqua.made = dethi.made AND dethi.monthi = monhoc.mamonhoc";
+        $result = mysqli_query($this->con, $sql);
+        return mysqli_fetch_assoc($result);
+    }
+
+    // Lấy điểm để thống kê 
+    public function getStatictical($made, $manhom)
+    {
+        $nhomm = $manhom != 0 ? "AND chitietnhom.manhom = $manhom" : "";
+        $sql = "SELECT chitietnhom.manguoidung, ketqua.manguoidung AS mandkq, makq, ketqua.made, diemthi
+        FROM chitietnhom
+        JOIN giaodethi ON chitietnhom.manhom = giaodethi.manhom
+        LEFT JOIN ketqua ON ketqua.manguoidung = chitietnhom.manguoidung AND ketqua.made = '$made'
+        WHERE giaodethi.made = '$made' $nhomm";
+        $result = mysqli_query($this->con, $sql);
+        $diemthi = array_fill(0, 10, 0);
+        $tongdiem = 0;
+        $soluong = 0;
+        $max = 0;
+        $chuanop = 0;
+        $khongthi = 0;
+        while($row = mysqli_fetch_assoc($result)){
+            if($row['diemthi'] != null) {
+                $tongdiem += $row['diemthi'];
+                $soluong++;
+                $index = ceil($row['diemthi']) > 0 ? ceil($row['diemthi']) - 1 : 0;
+                $diemthi[$index]++;
+                if($row['diemthi'] > $max) $max = $row['diemthi'];
+            } else {
+                if($row['mandkq'] != null) $chuanop++;
+                else $khongthi++; 
+            }
+        }
+        $rs = array(
+            "diem_trung_binh" => $soluong != 0 ? round($tongdiem/$soluong, 2) : 0,
+            "da_nop_bai" => $soluong,
+            "chua_nop_bai" => $chuanop,
+            "khong_thi" => $khongthi,
+            "diem_cao_nhat" => $max,
+            "thong_ke_diem" => $diemthi
+        );
+        return $rs;
+    }
+
+    public function getQueryAddColumnFirstname($original_query, $filter, $input, $args, $order) {
+        $from_index = strpos($original_query, "FROM");
+        $select_string = substr($original_query, 0, $from_index) . ", SUBSTRING_INDEX(hoten, ' ', -1) AS firstname";
+        $from_string = substr($original_query, $from_index);
+        $query = "$select_string $from_string";
+        return $query;
     }
 
     public function getListAbsentFromTest($filter, $input, $args) {
@@ -189,4 +312,6 @@ class KetQuaModel extends DB{
         }
         return $query;
     }
+
+    
 }
