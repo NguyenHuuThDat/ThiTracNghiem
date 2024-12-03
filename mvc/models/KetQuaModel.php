@@ -313,5 +313,42 @@ class KetQuaModel extends DB{
         return $query;
     }
 
-    
+    public function getTestScoreGroup($made,$manhom){
+        $sql = "SELECT ds.manguoidung,ds.hoten,kqt.diemthi,kqt.thoigianvaothi,kqt.thoigianlambai,kqt.socaudung,kqt.solanchuyentab FROM (SELECT ctn.manguoidung,nd.hoten FROM chitietnhom ctn JOIN nguoidung nd ON ctn.manguoidung=nd.id WHERE ctn.manhom=$manhom) ds LEFT JOIN 
+        (SELECT kq.manguoidung,kq.diemthi,kq.thoigianvaothi,kq.thoigianlambai,kq.socaudung,kq.solanchuyentab FROM ketqua kq JOIN giaodethi gdt ON kq.made=gdt.made WHERE gdt.made=$made AND gdt.manhom=$manhom) kqt ON ds.manguoidung=kqt.manguoidung";
+        $result = mysqli_query($this->con,$sql);
+        $rows = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    public function getTestAll($made,$ds){
+        $list = implode(", ", $ds);
+        $sql = "(SELECT KQ.makq, KQ.made, CTN.manguoidung, KQ.diemthi, KQ.thoigianvaothi, KQ.thoigianlambai, KQ.socaudung, KQ.solanchuyentab, email, hoten, avatar FROM chitietnhom CTN JOIN nguoidung ND ON ND.id = CTN.manguoidung LEFT JOIN ketqua KQ ON CTN.manguoidung = KQ.manguoidung AND KQ.made = $made WHERE KQ.made IS NULL AND CTN.manhom IN ($list))
+        UNION
+        (SELECT DISTINCT KQ.*, email, hoten, avatar FROM ketqua KQ, nguoidung ND, chitietnhom CTN WHERE KQ.manguoidung = ND.id AND CTN.manguoidung = ND.id AND KQ.made = $made  AND CTN.manhom IN ($list))
+        ORDER BY manguoidung ASC";
+        $result = mysqli_query($this->con,$sql);
+        $rows = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    public function chuyentab($made,$id){
+        $sql_dethi = "SELECT * FROM ketqua WHERE made='$made' AND manguoidung='$id'";
+        $result = mysqli_query($this->con, $sql_dethi);
+        $data_dethi = mysqli_fetch_assoc($result);
+        $solan = $data_dethi['solanchuyentab'];
+        $solan++;
+        $sql_update = "UPDATE ketqua SET solanchuyentab = '$solan' WHERE made='$made' AND manguoidung='$id'";
+        $result_update = mysqli_query($this->con,$sql_update);
+        $sql_check = "SELECT * FROM dethi where made = '$made'";
+        $result_check = mysqli_query($this->con,$sql_check);
+        $data_check = mysqli_fetch_assoc($result_check);
+        return $data_check['nopbaichuyentab'];
+    }
 }
