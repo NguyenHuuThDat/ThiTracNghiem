@@ -287,6 +287,59 @@ $(document).ready(function () {
 
   showGroup();
 
+  // Xừ lý sự kiện nhấn nút tạo đề
+  $("#btn-add-test").click(function (e) {
+    e.preventDefault();
+    if ($(".form-taodethi").valid()) {
+      if (getGroupSelected().length != 0) {
+        $.ajax({
+          type: "post",
+          url: "./test/addTest",
+          data: {
+            mamonhoc: groups[$("#nhom-hp").val()].mamonhoc,
+            tende: $("#name-exam").val(),
+            thoigianthi: $("#exam-time").val(),
+            thoigianbatdau: $("#time-start").val(),
+            thoigianketthuc: $("#time-end").val(),
+            socaude: $("#coban").val(),
+            socautb: $("#trungbinh").val(),
+            socaukho: $("#kho").val(),
+            chuong: $("#chuong").val(),
+            loaide: $("#tudongsoande").prop("checked") ? 1 : 0,
+            xemdiem: $("#xemdiem").prop("checked") ? 1 : 0,
+            xemdapan: $("#xemda").prop("checked") ? 1 : 0,
+            xembailam: $("#xembailam").prop("checked") ? 1 : 0,
+            daocauhoi: $("#daocauhoi").prop("checked") ? 1 : 0,
+            daodapan: $("#daodapan").prop("checked") ? 1 : 0,
+            tudongnop: $("#tudongnop").prop("checked") ? 1 : 0,
+            manhom: getGroupSelected(),
+          },
+          success: function (response) {
+            if (response) {
+              if ($("#tudongsoande").prop("checked")) location.href = "./test";
+              else location.href = `./test/select/${response}`;
+            } else {
+              Dashmix.helpers("jq-notify", {
+                type: "danger",
+                icon: "fa fa-times me-1",
+                message: "Tạo đề thi không thành công!",
+              });
+            }
+          },
+        });
+      } else {
+        Dashmix.helpers("jq-notify", {
+          type: "danger",
+          icon: "fa fa-times me-1",
+          message: "Bạn phải chọn ít nhất một nhóm học phần!",
+        });
+      }
+    }
+  });
+
+  /*Chỉnh sửa đề thi*/
+  $("#btn-update-quesoftest").hide();
+  // Khởi tạo biến đề thi để chứa thông tin đề
   let infodethi;
   function getDetail(made) {
     return $.ajax({
@@ -309,4 +362,185 @@ $(document).ready(function () {
       },
     });
   }
+
+  function checkDate(time) {
+    let valid = true;
+    let dateToCompare = new Date(time);
+    let currentTime = new Date(); // Thời gian hiện tại
+    if (dateToCompare.getTime() >= currentTime.getTime()) valid = false;
+    return valid;
+  }
+
+  // Hiển thị thông tin đề thi
+  function showInfo(dethi) {
+    let checkD = checkDate(dethi.thoigianbatdau);
+    $("#name-exam").val(dethi.tende),
+      $("#exam-time").val(dethi.thoigianthi),
+      $("#exam-time").prop("disabled", checkD);
+    $("#time-start").flatpickr({
+      enableTime: true,
+      altInput: true,
+      allowInput: checkD,
+      defaultDate: dethi.thoigianbatdau,
+      onReady: function (selectedDates, dateStr, instance) {
+        if (checkD) {
+          $(instance.input).prop("disabled", true);
+          instance._input.disabled = true;
+        }
+      },
+    });
+    $("#time-end").flatpickr({
+      enableTime: true,
+      altInput: true,
+      allowInput: true,
+      defaultDate: dethi.thoigianketthuc,
+    });
+    $("#coban").val(dethi.socaude), $("#coban").prop("disabled", checkD);
+    $("#trungbinh").val(dethi.socautb),
+      $("#trungbinh").prop("disabled", checkD);
+    $("#kho").val(dethi.socaukho), $("#kho").prop("disabled", checkD);
+    $("#tudongsoande").prop("checked", dethi.loaide == "1");
+    $("#tudongsoande").prop("disabled", checkD);
+    $("#xemdiem").prop("checked", dethi.xemdiemthi == "1");
+    $("#xemda").prop("checked", dethi.xemdapan == "1");
+    $("#xembailam").prop("checked", dethi.xemdapan == "1");
+    $("#daocauhoi").prop("checked", dethi.troncauhoi == "1");
+    $("#daodapan").prop("checked", dethi.trondapan == "1");
+    $("#tudongnop").prop("checked", dethi.nopbaichuyentab == "1");
+    $("#btn-update-test").data("id", dethi.made);
+    $.when(showGroup(), showChapter(dethi.monthi)).done(function () {
+      $("#nhom-hp").val(findIndexGroup(dethi.nhom[0])).trigger("change");
+      setGroup(dethi.nhom, dethi.thoigianbatdau);
+      if (dethi.loaide == "1") {
+        $("#chuong").prop("disabled", checkD);
+        $("#chuong").val(dethi.chuong).trigger("change");
+      } else $(".show-chap").hide();
+    });
+  }
+
+  function findIndexGroup(manhom) {
+    let i = 0;
+    let index = -1;
+    while (i <= groups.length && index == -1) {
+      index = groups[i].nhom.findIndex((item) => item.manhom == manhom);
+      if (index == -1) i++;
+    }
+    return i;
+  }
+
+  function setGroup(list, date) {
+    let v = checkDate(date);
+    $("#select-all-group").prop("disabled", v);
+    list.forEach((item) => {
+      $(`.select-group-item[value='${item}']`).prop("checked", true);
+      $(`.select-group-item[value='${item}']`).prop("disabled", v);
+    });
+  }
+
+  function validUpdate() {
+    let check = true;
+    if ($("#name-exam").val() == "") {
+      Dashmix.helpers("jq-notify", {
+        type: "danger",
+        icon: "fa fa-times me-1",
+        message: "Tên đề không được để trống",
+      });
+      check = false;
+    }
+    var startTime = new Date($("#time-start").val());
+    var endTime = new Date($("#time-end").val());
+
+    if (endTime <= startTime) {
+      Dashmix.helpers("jq-notify", {
+        type: "danger",
+        icon: "fa fa-times me-1",
+        message: "Thời gian kết thúc không được bé hơn thời gian bắt đầu",
+      });
+      check = false;
+    }
+
+    if (endTime < new Date(infodethi.thoigianketthuc)) {
+      Dashmix.helpers("jq-notify", {
+        type: "danger",
+        icon: "fa fa-times me-1",
+        message: "Thời gian kết thúc không được bé hơn thời gian kết thúc cũ",
+      });
+      check = false;
+    }
+
+    console.log(getMinutesBetweenDates(startTime, endTime));
+    if (
+      endTime > startTime &&
+      getMinutesBetweenDates(startTime, endTime) < infodethi.thoigianthi
+    ) {
+      Dashmix.helpers("jq-notify", {
+        type: "danger",
+        icon: "fa fa-times me-1",
+        message: "Thời gian làm bài không hợp lệ",
+      });
+      check = false;
+    }
+
+    return check;
+  }
+
+  // Xử lý nút cập nhật đề thi
+  $("#btn-update-test").click(function (e) {
+    e.preventDefault();
+    if (
+      (!checkDate(infodethi.thoigianbatdau) && $(".form-taodethi").valid()) ||
+      validUpdate()
+    ) {
+      let loaide = $("#tudongsoande").prop("checked") ? 1 : 0;
+      let made = $(this).data("id");
+      let socaude = $("#coban").val();
+      let socautb = $("#trungbinh").val();
+      let socaukho = $("#kho").val();
+      $.ajax({
+        type: "post",
+        url: "./test/updateTest",
+        data: {
+          made: made,
+          mamonhoc: groups[$("#nhom-hp").val()].mamonhoc,
+          tende: $("#name-exam").val(),
+          thoigianthi: $("#exam-time").val(),
+          thoigianbatdau: $("#time-start").val(),
+          thoigianketthuc: $("#time-end").val(),
+          socaude: socaude,
+          socautb: socautb,
+          socaukho: socaukho,
+          chuong: $("#chuong").val(),
+          loaide: loaide,
+          xemdiem: $("#xemdiem").prop("checked") ? 1 : 0,
+          xemdapan: $("#xemda").prop("checked") ? 1 : 0,
+          xembailam: $("#xembailam").prop("checked") ? 1 : 0,
+          daocauhoi: $("#daocauhoi").prop("checked") ? 1 : 0,
+          daodapan: $("#daodapan").prop("checked") ? 1 : 0,
+          tudongnop: $("#tudongnop").prop("checked") ? 1 : 0,
+          manhom: getGroupSelected(),
+        },
+        success: function (response) {
+          if (response) {
+            if (
+              (infodethi.loaide == 1 && loaide == 0) ||
+              (loaide == 0 &&
+                (infodethi.socaude != socaude ||
+                  infodethi.socautb != socautb ||
+                  infodethi.socaukho != socaukho))
+            ) {
+              location.href = `./test/select/${made}`;
+            } else {
+              location.href = `./test`;
+            }
+          } else {
+            Dashmix.helpers("jq-notify", {
+              type: "danger",
+              icon: "fa fa-times me-1",
+              message: "Cập nhật đề thi không thành công!",
+            });
+          }
+        },
+      });
+    }
+  });
 });
