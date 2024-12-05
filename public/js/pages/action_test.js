@@ -174,6 +174,14 @@ Dashmix.onLoad(() =>
 );
 
 $(document).ready(function () {
+  // Xử lý cắt url để lấy mã đề thi
+  let url = location.href.split("/");
+  let param = 0;
+  if (url[url.length - 2] == "update") {
+    param = url[url.length - 1];
+    getDetail(param);
+  }
+
   function showGroup() {
     let html = "<option></option>";
     $.ajax({
@@ -202,6 +210,14 @@ $(document).ready(function () {
     });
   }
 
+  // Khi chọn nhóm học phần thì chương sẽ tự động đổi để phù hợp với môn học
+  $("#nhom-hp").on("change", function () {
+    let index = $(this).val();
+    let mamonhoc = groups[index].mamonhoc;
+    showListGroup(index);
+    showChapter(mamonhoc);
+  });
+
   // Hiển thị chương
   function showChapter(mamonhoc) {
     let html = "<option value=''></option>";
@@ -222,6 +238,54 @@ $(document).ready(function () {
       },
     });
   }
+
+  // Hiển thị danh sách nhóm học phần
+  function showListGroup(index) {
+    let html = ``;
+    if (groups[index].nhom.length > 0) {
+      html += `<div class="col-12 mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="select-all-group">
+                <label class="form-check-label" for="select-all-group">Chọn tất cả</label>
+            </div></div>`;
+      groups[index].nhom.forEach((item) => {
+        html += `<div class="col-4">
+                    <div class="form-check">
+                        <input class="form-check-input select-group-item" type="checkbox" value="${item.manhom}"
+                            id="nhom-${item.manhom}" name="nhom-${item.manhom}">
+                        <label class="form-check-label" for="nhom-${item.manhom}">${item.tennhom}</label>
+                    </div>
+                </div>`;
+      });
+    } else {
+      html += `<div class="text-center fs-sm"><img style="width:100px" src="./public/media/svg/empty_data.png" alt=""></div>`;
+    }
+    $("#list-group").html(html);
+  }
+
+  // Chọn || Huỷ chọn tất cả nhóm
+  $(document).on("click", "#select-all-group", function () {
+    let check = $(this).prop("checked");
+    $(".select-group-item").prop("checked", check);
+  });
+
+  // Lấy các nhóm được chọn
+  function getGroupSelected() {
+    let result = [];
+    $(".select-group-item").each(function () {
+      if ($(this).prop("checked") == true) {
+        result.push($(this).val());
+      }
+    });
+    return result;
+  }
+
+  $("#tudongsoande").on("click", function () {
+    $(".show-chap").toggle();
+    $("#chuong").val("").trigger("change");
+  });
+
+  showGroup();
 
   let infodethi;
   function getDetail(made) {
