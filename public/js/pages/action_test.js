@@ -1,5 +1,38 @@
 Dashmix.helpersOnLoad(["js-flatpickr", "jq-datepicker", "jq-select2"]);
 
+let groups = [];
+
+function getMinutesBetweenDates(start, end) {
+  // Chuyển đổi đối số thành đối tượng Date
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+
+  // Tính số phút giữa hai khoảng thời gian
+  const diffMs = endDate.getTime() - startDate.getTime();
+  const diffMins = Math.round(diffMs / 60000);
+
+  // Trả về số phút tính được
+  return diffMins;
+}
+
+function getToTalQuestionOfChapter(chuong, monhoc, dokho) {
+  var result = 0;
+  $.ajax({
+    url: "./question/getsoluongcauhoi",
+    type: "post",
+    data: {
+      chuong: chuong,
+      monhoc: monhoc,
+      dokho: dokho,
+    },
+    async: false,
+    success: function (response) {
+      result = response;
+    },
+  });
+  return result;
+}
+
 Dashmix.onLoad(() =>
   class {
     static initValidation() {
@@ -139,3 +172,77 @@ Dashmix.onLoad(() =>
     }
   }.init()
 );
+
+$(document).ready(function () {
+  function showGroup() {
+    let html = "<option></option>";
+    $.ajax({
+      type: "post",
+      url: "./module/loadData",
+      async: false,
+      data: {
+        hienthi: 1,
+      },
+      dataType: "json",
+      success: function (response) {
+        groups = response;
+        response.forEach((item, index) => {
+          html += `<option value="${index}">${
+            item.mamonhoc +
+            " - " +
+            item.tenmonhoc +
+            " - NH" +
+            item.namhoc +
+            " - HK" +
+            item.hocky
+          }</option>`;
+        });
+        $("#nhom-hp").html(html);
+      },
+    });
+  }
+
+  // Hiển thị chương
+  function showChapter(mamonhoc) {
+    let html = "<option value=''></option>";
+    $("#chuong").val("").trigger("change");
+    $.ajax({
+      type: "post",
+      url: "./subject/getAllChapter",
+      async: false,
+      data: {
+        mamonhoc: mamonhoc,
+      },
+      dataType: "json",
+      success: function (data) {
+        data.forEach((item) => {
+          html += `<option value="${item.machuong}">${item.tenchuong}</option>`;
+        });
+        $("#chuong").html(html);
+      },
+    });
+  }
+
+  let infodethi;
+  function getDetail(made) {
+    return $.ajax({
+      type: "post",
+      url: "./test/getDetail",
+      data: {
+        made: made,
+      },
+      dataType: "json",
+      success: function (response) {
+        if (response.loaide == 0) {
+          $("#btn-update-quesoftest").show();
+          $("#btn-update-quesoftest").attr(
+            "href",
+            `./test/select/${response.made}`
+          );
+        }
+        infodethi = response;
+        showInfo(response);
+      },
+    });
+  }
+});
