@@ -137,3 +137,14 @@ $(document).ready(function () {
 const container = document.querySelector(".content");
 const currentUser = container.dataset.id;
 delete container.dataset.id;
+
+// Pagination
+const mainPagePagination = new Pagination(null, null, showListTest);
+mainPagePagination.option.controller = "test";
+mainPagePagination.option.model = "DeThiModel";
+mainPagePagination.option.id = currentUser;
+mainPagePagination.option.custom.function = "getAllCreatedTest";
+mainPagePagination.getPagination(
+  mainPagePagination.option,
+  mainPagePagination.valuePage.curPage
+);
