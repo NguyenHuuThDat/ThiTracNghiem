@@ -3,7 +3,7 @@
         <button id="btn-thoat" class="btn btn-hero btn-danger" role="button"><i class="fa fa-power-off"></i>
             Thoát</button>
         <div class="nav-center">
-            <span class="fw-bold fs-5">Thí sinh: Name></span>
+            <span class="fw-bold fs-5">Thí sinh: <?php echo $_SESSION['user_name'] ?></span>
         </div>
         <div class="nav-right d-flex align-items-center">
             <div class="nav-time me-4">
@@ -13,7 +13,7 @@
         </div>
     </div>
 </nav>
-<div class="container mb-5 mt-6" id="dethicontent">
+<div class="container mb-5 mt-6" id="dethicontent" data-id="<?php echo $data["Made"]?>">
     <div class="row">
         <div class="col-8" id="list-question">
         </div>

@@ -224,4 +224,30 @@ $(document).ready(function () {
       }
     }, 1000);
   }
+
+  $(window).on("beforeunload", function () {
+    let curTime = new Date().getTime();
+    if (curTime > endTime) {
+      localStorage.removeItem(cautraloi);
+      localStorage.removeItem(dethi);
+      location.href = `./test/start/${made}`;
+    } else {
+      countDown();
+    }
+  });
+
+  $(window).on("blur", function () {
+    $.ajax({
+      type: "post",
+      url: "./test/chuyentab",
+      data: {
+        made: $("#dethicontent").data("id"),
+      },
+      success: function (response) {
+        if (response == 1) {
+          nopbai();
+        }
+      },
+    });
+  });
 });
