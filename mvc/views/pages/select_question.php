@@ -54,6 +54,7 @@
                 <ul class="list-group fs-sm" id="list-question">
                     <!-- Danh sách câu hỏi -->
                 </ul>
+                <?php if(isset($data["Plugin"]["pagination"])) require "./mvc/views/inc/pagination.php"?>
             </div>
         </div>
     </div>
