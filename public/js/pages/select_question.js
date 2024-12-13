@@ -337,3 +337,22 @@ $.when(getInfoTest(), getQuestionOfTest()).done(function () {
     );
   });
 });
+
+const mainPagePagination = new Pagination(null, null, getAnswerListForQuestion);
+mainPagePagination.option.controller = "test";
+mainPagePagination.option.model = "DeThiModel";
+mainPagePagination.option.limit = 10;
+mainPagePagination.option.filter = {};
+mainPagePagination.option.custom.function = "getQuestionsForTest";
+
+const waitInfoTest = setInterval(function () {
+  if (infoTest) {
+    mainPagePagination.option.id = infoTest.nguoitao;
+    mainPagePagination.option.mamonhoc = infoTest.monthi;
+    mainPagePagination.getPagination(
+      mainPagePagination.option,
+      mainPagePagination.valuePage.curPage
+    );
+    clearInterval(waitInfoTest);
+  }
+}, 200);
