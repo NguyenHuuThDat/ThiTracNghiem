@@ -6515,7 +6515,7 @@ CREATE TABLE `nguoidung` (
   `googleid` varchar(150) DEFAULT NULL,
   `hoten` varchar(255) NOT NULL,
   `gioitinh` tinyint(1) DEFAULT NULL,
-  `ngaysinh` date DEFAULT '1990-01-01',
+  `ngaysinh` date DEFAULT '2003-01-01',
   `avatar` varchar(255) DEFAULT NULL,
   `ngaythamgia` date NOT NULL DEFAULT current_timestamp(),
   `matkhau` varchar(60) DEFAULT NULL,
