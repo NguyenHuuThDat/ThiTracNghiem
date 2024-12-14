@@ -1,8 +1,8 @@
 <?php
 class App{
-    protected $controller="home";
-    protected $action="default";
-    protected $params=[];
+    protected $controller = "home";
+    protected $action = "default";
+    protected $params = [];
     
 
     function __construct(){
@@ -31,6 +31,7 @@ class App{
             }
             unset($arr[1]);
         }
+
         // Params
         $this->params = $arr?array_values($arr):[];
         try {
@@ -42,7 +43,6 @@ class App{
             $this->action = 'default';
             call_user_func_array([$this->controller, $this->action], []);
         }
-
     }
 
     function UrlProcess(){
