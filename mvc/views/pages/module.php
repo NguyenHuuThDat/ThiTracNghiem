@@ -49,3 +49,34 @@
                         <select class="js-select2 form-select" id="mon-hoc" name="mon-hoc" style="width: 100%;"
                             data-placeholder="Chọn môn học">
                         </select>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-6">
+                            <label for="" class="form-label">Năm học</label>
+                            <select class="js-select2 form-select" id="nam-hoc" name="nam-hoc" style="width: 100%;"
+                                data-placeholder="Chọn năm học">
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">Học kỳ</label>
+                            <select class="js-select2 form-select" id="hoc-ky" name="hoc-ky" style="width: 100%;"
+                                data-placeholder="Chọn học kỳ">
+                                <option></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="block-content block-content-full text-end bg-body">
+                    <button type="button" class="btn btn-sm btn-alt-secondary me-1"
+                        data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-sm btn-primary add-group-element" id="add-group">Lưu</button>
+                    <button type="button" class="btn btn-sm btn-primary update-group-element" id="update-group"
+                        data-id="">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
