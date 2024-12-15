@@ -20,3 +20,32 @@
     <div class="class-group" id="class-group">
     </div>
 </div>
+<div class="modal fade" id="modal-add-group" tabindex="-1" role="dialog" aria-labelledby="modal-add-group"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title add-group-element">Thêm nhóm</h3>
+                    <h3 class="block-title update-group-element">Cập nhật thông tin nhóm</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <form class="block-content fs-sm form-add-group">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Tên nhóm</label>
+                        <input type="text" class="form-control" name="ten-nhom" id="ten-nhom"
+                            placeholder="Nhập tên nhóm">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Ghi chú</label>
+                        <input type="text" class="form-control" name="ghi-chu" id="ghi-chu" placeholder="Nhập ghi chú">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Môn học</label>
+                        <select class="js-select2 form-select" id="mon-hoc" name="mon-hoc" style="width: 100%;"
+                            data-placeholder="Chọn môn học">
+                        </select>
