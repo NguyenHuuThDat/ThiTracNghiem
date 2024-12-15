@@ -8,7 +8,7 @@ class AnnouncementModel extends DB
         $result = mysqli_query($this->con, $sql);
         if($result) {
             $matb = mysqli_insert_id($this->con);
-            // Một thông báo gửi cho nhiều nhóm 
+            // Một thông báo gửi cho nhiều nhóm .
             $result = $this->sendAnnouncement($matb, $nhom);
             return $matb;
         } else return false;
