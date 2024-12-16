@@ -215,3 +215,27 @@
                                 <td class="text-center">&nbsp</td>
                             </tr> -->
                         </tbody>
+                    </table>
+                    <div class="row justify-content-around">
+                        <div class="col-6 form-check form-switch d-flex justify-content-center gap-2">
+                            <input class="form-check-input" type="checkbox" value="join" id="join_dethi"
+                                name="tgthi">
+                            <label class="form-check-label" for="join_dethi">Tham gia thi</label>
+                        </div>
+                        <div class="col-6 form-check form-switch d-flex justify-content-center gap-2">
+                            <input class="form-check-input" type="checkbox" value="join" id="join_hocphan"
+                                name="tghocphan">
+                            <label class="form-check-label" for="join_hocphan">Tham gia học phần</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="manhomquyen">
+                <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-dismiss="modal">Huỷ</button>
+                <button type="button" class="btn btn-sm btn-primary add-role-element" id="save-role">Lưu</button>
+                <button type="button" class="btn btn-sm btn-primary update-role-element" id="update-role-btn">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
