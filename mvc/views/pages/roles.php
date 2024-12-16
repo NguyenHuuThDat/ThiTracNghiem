@@ -128,3 +128,90 @@
                                     <input class="form-check-input" type="checkbox" name="monhoc" value="delete">
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Chương</td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="chuong" value="view">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="chuong" value="create">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="chuong" value="update">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="chuong" value="delete">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Phân công</td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="phancong" value="view">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="phancong" value="create">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="phancong" value="update">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="phancong" value="delete">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Đề thi</td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="dethi" value="view">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="dethi" value="create">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="dethi" value="update">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="dethi" value="delete">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nhóm quyền</td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="nhomquyen" value="view">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="nhomquyen" value="create">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="nhomquyen" value="update">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="nhomquyen" value="delete">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thông báo</td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="thongbao" value="view">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="thongbao" value="create">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="thongbao" value="update">
+                                </td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="thongbao" value="delete">
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td>Cài đặt</td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="caidat" value="view">
+                                </td>
+                                <td class="text-center">&nbsp</td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" name="caidat" value="update">
+                                </td>
+                                <td class="text-center">&nbsp</td>
+                            </tr> -->
+                        </tbody>
