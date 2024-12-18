@@ -62,3 +62,17 @@ class Module extends Controller
         } else
             echo json_encode(false);
     }
+    public function add()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("hocphan", "create")) {
+            $tennhom = $_POST['tennhom'];
+            $ghichu = $_POST['ghichu'];
+            $monhoc = $_POST['monhoc'];
+            $namhoc = $_POST['namhoc'];
+            $hocky = $_POST['hocky'];
+            $giangvien = $_SESSION['user_id'];
+            $result = $this->nhomModel->create($tennhom, $ghichu, $namhoc, $hocky, $giangvien, $monhoc);
+            echo $result;
+        } else
+            echo json_encode(false);
+    }
