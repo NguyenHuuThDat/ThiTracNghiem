@@ -21,7 +21,7 @@ class MailAuth extends DB {
         $this->mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
         $this->mail->SMTPAuth = true; // Enable SMTP authentication
         $this->mail->Username = 'huudatnh178@gmail.com'; // SMTP username
-        $this->mail->Password = ''; // SMTP password
+        $this->mail->Password = 'erhd tdvj ogrg pzbu'; // SMTP password
         // $this->mail->Password = 'pkiv jfbi tati axsc'; // SMTP password
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $this->mail->Port = 587; // TCP port to connect to
