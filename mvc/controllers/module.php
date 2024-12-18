@@ -29,3 +29,24 @@ class Module extends Controller
         } else
             $this->view("single_layout", ["Page" => "error/page_403", "Title" => "Lỗi !"]);
     }
+    public function detail($manhom)
+    {
+        $chitietnhom = $this->nhomModel->getDetailGroup($manhom);
+        if (AuthCore::checkPermission("hocphan", "view") && $_SESSION['user_id'] == $chitietnhom['giangvien']) {
+            $this->view("main_layout", [
+                "Page" => "class_detail",
+                "Title" => "Quản lý nhóm",
+                "Plugin" => [
+                    "datepicker" => 1,
+                    "flatpickr" => 1,
+                    "sweetalert2" => 1,
+                    "jquery-validate" => 1,
+                    "notify" => 1,
+                    "pagination" => [],
+                ],
+                "Script" => "class_detail",
+                "Detail" => $chitietnhom
+            ]);
+        } else
+            $this->view("single_layout", ["Page" => "error/page_403", "Title" => "Lỗi !"]);
+    }
