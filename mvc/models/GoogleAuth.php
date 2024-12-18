@@ -10,8 +10,8 @@ class GoogleAuth extends DB {
     public function __construct() {
         parent::__construct();
         $this->client = new Google_Client();
-        // $this->client->setClientId('277160480215-midinsb1aoej4qgngt5co58jk9eghkef.apps.googleusercontent.com');
-        // $this->client->setClientSecret('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');
+        $this->client->setClientId('277160480215-midinsb1aoej4qgngt5co58jk9eghkef.apps.googleusercontent.com');
+        $this->client->setClientSecret('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');
         $this->client->setRedirectUri(login_path);
         $this->client->setScopes('email');
         $this->client->addScope('profile');
