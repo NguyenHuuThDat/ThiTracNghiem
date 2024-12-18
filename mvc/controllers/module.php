@@ -76,3 +76,12 @@ class Module extends Controller
         } else
             echo json_encode(false);
     }
+    public function delete()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("hocphan", "delete")) {
+            $manhom = $_POST['manhom'];
+            $result = $this->nhomModel->delete($manhom);
+            echo $result;
+        } else
+            echo json_encode(false);
+    }
