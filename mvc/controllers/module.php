@@ -50,3 +50,15 @@ class Module extends Controller
         } else
             $this->view("single_layout", ["Page" => "error/page_403", "Title" => "Lỗi !"]);
     }
+
+    public function loadData()
+    {
+        AuthCore::checkAuthentication();
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $hienthi = $_POST['hienthi'];
+            $user_id = $_SESSION['user_id'];
+            $result = $this->nhomModel->getBySubject($user_id, $hienthi);
+            echo json_encode($result);
+        } else
+            echo json_encode(false);
+    }
