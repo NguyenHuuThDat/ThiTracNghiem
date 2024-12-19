@@ -118,4 +118,20 @@ class Module extends Controller
         } else
             echo json_encode(false);
     }
-    
+    public function updateInvitedCode()
+    {
+        if($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("hocphan", "create")) {
+            $manhom = $_POST['manhom'];
+            $result = $this->nhomModel->updateInvitedCode($manhom);
+            echo $result;
+        }
+    }
+
+    public function getInvitedCode()
+    {
+        if($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("hocphan", "view")) {
+            $manhom = $_POST['manhom'];
+            $result = $this->nhomModel->getInvitedCode($manhom);
+            echo $result['mamoi'];
+        }
+    }
