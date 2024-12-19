@@ -109,3 +109,13 @@ class Module extends Controller
         } else
             echo json_encode(false);
     }
+    public function getDetail()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("hocphan", "create")) {
+            $manhom = $_POST['manhom'];
+            $result = $this->nhomModel->getById($manhom);
+            echo json_encode($result);
+        } else
+            echo json_encode(false);
+    }
+    
