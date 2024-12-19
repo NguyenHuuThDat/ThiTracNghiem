@@ -96,33 +96,42 @@ class User extends Controller{
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             require_once 'vendor/autoload.php';
+
             $inputFileName = $_FILES["fileToUpload"]["tmp_name"];
+
             try {
-                $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-                $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-                $objPHPExcel = $objReader->load($inputFileName);
+                $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($inputFileName);
+                $spreadsheet = $reader->load($inputFileName);
             } catch (Exception $e) {
                 die('Lỗi không thể đọc file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
             }
-            $sheet = $objPHPExcel->setActiveSheetIndex(0);
-            $Totalrow = $sheet->getHighestRow();
-            $LastColumn = $sheet->getHighestColumn();
-            $TotalCol = PHPExcel_Cell::columnIndexFromString($LastColumn);
+
+            $sheet = $spreadsheet->getActiveSheet();
+            $highestRow = $sheet->getHighestRow();
+            $highestColumn = $sheet->getHighestColumn();
+            $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
+
             $data = [];
-            for ($i = 3; $i <= $Totalrow; $i++) {
-                $fullname = "";
+            for ($i = 2; $i <= $highestRow; $i++) {
+                $ho = "";
+                $ten = "";
                 $email = "";
                 $mssv = "";
-                for ($j = 0; $j < $TotalCol; $j++) {
-                    if($j==1) $mssv = $sheet->getCellByColumnAndRow($j, $i)->getValue();
-                    if($j==2) $fullname.=$sheet->getCellByColumnAndRow($j, $i)->getValue();
-                    if($j==3) $fullname.=$sheet->getCellByColumnAndRow($j, $i)->getValue();
-                    if($j==7) $email = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+
+                for ($j = 0; $j < $highestColumnIndex; $j++) {
+                    $cellValue = $sheet->getCellByColumnAndRow($j + 1, $i)->getValue(); // +1 because columnIndexFromString is 1-based
+
+                    if ($j == 1) $mssv = $cellValue;
+                    if ($j == 2) $ho .= $cellValue;
+                    if ($j == 3) $ten .= $cellValue;
+                    if ($j == 7) $email = $cellValue;
                 }
+                $fullname = $ho . ' ' . $ten;
+
                 $data[$i]['fullname'] = trim($fullname);
                 $data[$i]['email'] = trim($email);
                 $data[$i]['mssv'] = trim($mssv);
-                $data[$i]['nhomquyen'] = 11;
+                $data[$i]['nhomquyen'] = 3;
                 $data[$i]['trangthai'] = 1;
             }
             echo json_encode($data);
