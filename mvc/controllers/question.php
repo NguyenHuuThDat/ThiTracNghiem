@@ -3,22 +3,21 @@
 use PhpOffice\PhpWord\Element\AbstractContainer;
 use PhpOffice\PhpWord\Element\Text;
 use PhpOffice\PhpWord\IOFactory as WordIOFactory;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
-class Question extends Controller
-{
+class Question extends Controller {
     public $cauHoiModel;
     public $cauTraLoiModel;
 
-    function __construct()
-    {
+    function __construct() {
         $this->cauHoiModel = $this->model("CauHoiModel");
         $this->cauTraLoiModel = $this->model("CauTraLoiModel");
         parent::__construct();
         require_once "./mvc/core/Pagination.php";
     }
 
-    function default()
-    {
+    function default() {
         if (AuthCore::checkPermission("cauhoi", "view")) {
             $this->view("main_layout", [
                 "Page" => "question",
@@ -39,8 +38,7 @@ class Question extends Controller
         }
     }
 
-    public function xulyDocx()
-    {
+    public function xulyDocx() {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("cauhoi", "create")) {
             require_once 'vendor/autoload.php';
             $filename = $_FILES["fileToUpload"]["tmp_name"];
@@ -48,8 +46,7 @@ class Question extends Controller
             $phpWord = $objReader->load($filename);
             $text = '';
             // Lấy kí tự từng đoạn
-            function getWordText($element)
-            {
+            function getWordText($element) {
                 $result = '';
                 if ($element instanceof AbstractContainer) {
                     foreach ($element->getElements() as $element) {
@@ -86,40 +83,41 @@ class Question extends Controller
         }
     }
 
-    public function addExcel()
-    {
+    public function addExcel() {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("cauhoi", "create")) {
             require_once 'vendor/autoload.php';
             $inputFileName = $_FILES["fileToUpload"]["tmp_name"];
             try {
-                $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-                $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-                $objPHPExcel = $objReader->load($inputFileName);
-            } catch (Exception $e) {
+                // Xác định loại file và tạo reader
+                $spreadsheet = IOFactory::load($inputFileName);
+            } catch (\PhpOffice\PhpSpreadsheet\Reader\Exception $e) {
                 die('Lỗi không thể đọc file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
             }
-            $sheet = $objPHPExcel->setActiveSheetIndex(0);
-            $Totalrow = $sheet->getHighestRow();
-            $LastColumn = $sheet->getHighestColumn();
-            $TotalCol = PHPExcel_Cell::columnIndexFromString($LastColumn);
+    
+            // Lấy sheet đầu tiên
+            $sheet = $spreadsheet->getActiveSheet();
+            $totalRow = $sheet->getHighestRow();
+            $lastColumn = $sheet->getHighestColumn();
+            $totalCol = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($lastColumn);
+    
             $data = [];
-            for ($i = 2; $i <= $Totalrow; $i++) {
-                //----Lặp cột
-                for ($j = 0; $j < $TotalCol; $j++) {
-                    // Tiến hành lấy giá trị của từng ô đổ vào mảng
+            for ($i = 2; $i <= $totalRow; $i++) {
+                // Lặp qua các cột
+                for ($j = 1; $j <= $totalCol; $j++) {
                     $check = '';
-                    if($j == 0){
+                    $cellValue = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+                    if ($j == 1) {
                         $check = "level";
-                        $data[$i - 2][$check] = $sheet->getCellByColumnAndRow($j, $i)->getValue();
-                    } else if($j == 1){
+                        $data[$i - 2][$check] = $cellValue;
+                    } elseif ($j == 2) {
                         $check = "question";
-                        $data[$i - 2][$check] = $sheet->getCellByColumnAndRow($j, $i)->getValue();
-                    } else if($j == $TotalCol-1){
+                        $data[$i - 2][$check] = $cellValue;
+                    } elseif ($j == $totalCol) {
                         $check = "answer";
-                        $data[$i - 2][$check] = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+                        $data[$i - 2][$check] = $cellValue;
                     } else {
                         $check = "option";
-                        $data[$i - 2][$check][] = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+                        $data[$i - 2][$check][] = $cellValue;
                     }
                 }
             }
@@ -127,8 +125,7 @@ class Question extends Controller
         }
     }
 
-    public function addQues()
-    {
+    public function addQues() {
         if (AuthCore::checkPermission("cauhoi", "create")) {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mamon = $_POST['mamon'];
@@ -148,8 +145,7 @@ class Question extends Controller
         }
     }
 
-    public function addQuesFile()
-    {
+    public function addQuesFile() {
         if (AuthCore::checkPermission("cauhoi", "create")) {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $nguoitao = $_SESSION['user_id'];
@@ -178,8 +174,7 @@ class Question extends Controller
     }
 
 
-    public function getQuestion()
-    {
+    public function getQuestion() {
         if (AuthCore::checkPermission("cauhoi", "view")) {
             if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $result = $this->cauHoiModel->getAll();
@@ -188,8 +183,7 @@ class Question extends Controller
         }
     }
 
-    public function delete()
-    {
+    public function delete() {
         if (AuthCore::checkPermission("cauhoi", "delete")) {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $id = $_POST['macauhoi'];
@@ -198,8 +192,7 @@ class Question extends Controller
         }
     }
 
-    public function getQuestionById()
-    {
+    public function getQuestionById() {
         if (AuthCore::checkPermission("cauhoi", "view")) {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $id = $_POST['id'];
@@ -209,8 +202,7 @@ class Question extends Controller
         }
     }
 
-    public function getAnswerById()
-    {
+    public function getAnswerById() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id = $_POST['id'];
             $result = $this->cauTraLoiModel->getAll($id);
@@ -218,8 +210,7 @@ class Question extends Controller
         }
     }
 
-    public function editQuesion()
-    {
+    public function editQuesion() {
         if (AuthCore::checkPermission("cauhoi", "update")) {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $id = $_POST['id'];
@@ -239,8 +230,7 @@ class Question extends Controller
         }
     }
 
-    public function getTotalPage()
-    {
+    public function getTotalPage() {
         AuthCore::checkAuthentication();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $content = $_POST['content'];
@@ -249,8 +239,7 @@ class Question extends Controller
         }
     }
 
-    public function getQuestionBySubject()
-    {
+    public function getQuestionBySubject() {
         AuthCore::checkAuthentication();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mamonhoc = $_POST['mamonhoc'];
@@ -263,8 +252,7 @@ class Question extends Controller
         }
     }
     
-    public function getTotalPageQuestionBySubject()
-    {
+    public function getTotalPageQuestionBySubject() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mamonhoc = $_POST['mamonhoc'];
             $machuong = $_POST['machuong'];
@@ -288,8 +276,7 @@ class Question extends Controller
         }
     }
     
-    public function getsoluongcauhoi()
-    {
+    public function getsoluongcauhoi() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $chuong = isset($_POST['chuong']) ? $_POST['chuong'] : array();
             $monhoc = $_POST['monhoc'];
