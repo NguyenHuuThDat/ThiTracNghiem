@@ -99,3 +99,13 @@ class Module extends Controller
         } else
             echo json_encode(false);
     }
+    public function hide()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("hocphan", "create")) {
+            $manhom = $_POST['manhom'];
+            $giatri = $_POST['giatri'];
+            $result = $this->nhomModel->hide($manhom, $giatri);
+            echo $result;
+        } else
+            echo json_encode(false);
+    }
