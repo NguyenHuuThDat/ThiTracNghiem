@@ -24,20 +24,20 @@ Dashmix.onLoad((() => class {
             },
             messages: {
                 "signup-username": {
-                    required: "Please enter a username",
-                    minlength: "Your username must consist of at least 3 characters"
+                    required: "Vui lòng nhập tên người dùng",
+                    minlength: "Tên người dùng của bạn phải bao gồm ít nhất 3 ký tự"
                 },
-                "signup-email": "Please enter a valid email address",
+                "signup-email": "Vui lòng nhập địa chỉ email hợp lệ",
                 "signup-password": {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
+                    required: "Vui lòng nhập mật khẩu",
+                    minlength: "Mật khẩu của bạn phải dài ít nhất 5 ký tự"
                 },
                 "signup-password-confirm": {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long",
-                    equalTo: "Please enter the same password as above"
+                    required: "Vui lòng nhập mật khẩu",
+                    minlength: "Mật khẩu của bạn phải dài ít nhất 5 ký tự",
+                    equalTo: "Vui lòng nhập cùng một mật khẩu như trên"
                 },
-                "signup-terms": "You must agree to the service terms!"
+                "signup-terms": "Bạn phải đồng ý với các điều khoản dịch vụ!"
             }
         })
     }
