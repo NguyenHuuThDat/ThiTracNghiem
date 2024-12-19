@@ -67,50 +67,41 @@ Dashmix.onLoad((() => class {
 const showData = function (users) {
   let html = "";
   users.forEach((user) => {
-    html += `<tr>
-                          <td class="text-center">
-                              <strong>${user.id}</strong>
-                          </td>
-                          <td class="fs-sm d-flex align-items-center">
-                              <img class="img-avatar img-avatar48 me-3" src="./public/media/avatars/${user.avatar == null ? `avatar2.jpg`: user.avatar}" alt="">
-                              <div class="d-flex flex-column">
-                                  <strong class="text-primary">${
-                                    user.hoten
-                                  }</strong>
-                                  <span class="fw-normal fs-sm text-muted">${
-                                    user.email
-                                  }</span>
-                              </div>
-                          </td>
-                          <td class="text-center">${
-                            user.gioitinh == 1 ? "Nam" : "Nữ"
-                          }</td>
-                          <td class="text-center">${user.ngaysinh}</td>
-                          <td class="text-center">${user.tennhomquyen}</td>
-                          <td class="text-center">${user.ngaythamgia}</td>
-                          <td class="text-center">
-                              <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill ${
-                                user.trangthai == 1
-                                  ? "bg-success-light text-success"
-                                  : "bg-danger-light text-danger"
-                              } bg-success-light text-success">${
-      user.trangthai == 1 ? "Hoạt động" : "Khoá"
-    }</span>
-                          </td> 
-                          <td class="text-center col-action">
-                              <a data-role="nguoidung" data-action="update" class="btn btn-sm btn-alt-secondary user-edit" href="javascript:void(0)"
-                              data-bs-toggle="tooltip" aria-label="Chỉnh sửa" data-bs-original-title="Chỉnh sửa" data-id="${user.id}">
-                                  <i class="fa fa-fw fa-pencil"></i>
-                              </a>
-                              <a data-role="nguoidung" data-action="delete" class="btn btn-sm btn-alt-secondary user-delete" href="javascript:void(0)" data-bs-toggle="tooltip"
-                                  aria-label="Xoá" data-bs-original-title="Xoá" data-id="${
-                                    user.id
-                                  }">
-                                  <i class="fa fa-fw fa-times"></i>
-                              </a>
-                          </td>
-                      </tr>
-      `;
+    html += `
+              <tr>
+                <td class="text-center">
+                  <strong>${user.id}</strong>
+                </td>
+
+                <td class="fs-sm d-flex align-items-center">
+                  <img class="img-avatar img-avatar48 me-3" src="./public/media/avatars/${user.avatar == null ? `avatar2.jpg`: user.avatar}" alt="">
+                  <div class="d-flex flex-column">
+                    <strong class="text-primary">${user.hoten}</strong>
+                    <span class="fw-normal fs-sm text-muted">${user.email}</span>
+                  </div>
+                </td>
+                          
+                <td class="text-center">${user.gioitinh == 1 ? "Nam" : "Nữ"}</td>
+                <td class="text-center">${user.ngaysinh}</td>
+                <td class="text-center">${user.tennhomquyen}</td>
+                <td class="text-center">${user.ngaythamgia}</td>
+                <td class="text-center">
+                  <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill ${user.trangthai == 1 ? "bg-success-light text-success" : "bg-danger-light text-danger"} bg-success-light text-success">
+                    ${user.trangthai == 1 ? "Hoạt động" : "Khoá"}
+                  </span>
+                </td> 
+
+                <td class="text-center col-action">
+                  <a data-role="nguoidung" data-action="update" class="btn btn-sm btn-alt-secondary user-edit" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Chỉnh sửa" data-bs-original-title="Chỉnh sửa" data-id="${user.id}">
+                    <i class="fa fa-fw fa-pencil"></i>
+                  </a>
+                  
+                  <a data-role="nguoidung" data-action="delete" class="btn btn-sm btn-alt-secondary user-delete" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Xoá" data-bs-original-title="Xoá" data-id="${user.id}">
+                    <i class="fa fa-fw fa-times"></i>
+                  </a>
+                </td>
+              </tr>
+            `;
   });
   $("#list-user").html(html);
   $('[data-bs-toggle="tooltip"]').tooltip();
@@ -339,7 +330,7 @@ $(document).ready(function () {
         success: function (response) {
           console.log(response)
           addExcel(response,password);
-        },
+        }, 
         complete: function () {
           Dashmix.layout("header_loader_off");
         },
@@ -360,7 +351,8 @@ $(document).ready(function () {
         $("#ps_user_group").val("");
         $("#file-cau-hoi").val("");
         $("#modal-add-user").modal("hide");
-        Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-times me-1', message: `Thêm người dùng không thành công!` });
+        // Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-times me-1', message: `Thêm người dùng thành công!` });
+        Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: `Thêm người dùng thành công!` });
       },
     });
   }
