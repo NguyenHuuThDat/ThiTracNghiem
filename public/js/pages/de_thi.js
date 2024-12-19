@@ -3,8 +3,6 @@ $(document).ready(function () {
   const made = $("#dethicontent").data("id");
   const dethi = "dethi" + made;
   const cautraloi = "cautraloi" + made;
-  let endTime = -1;
-
   function getQuestion() {
     return $.ajax({
       type: "post",
@@ -25,17 +23,17 @@ $(document).ready(function () {
       html += `<div class="question rounded border mb-3 bg-white" id="c${
         index + 1
       }">
-            <div class="question-top p-3">
-                <p class="question-content fw-bold mb-3">${index + 1}. ${
+        <div class="question-top p-3">
+            <p class="question-content fw-bold mb-3">${index + 1}. ${
         question.noidung
       }</p>
-                <div class="row">`;
+            <div class="row">`;
       question.cautraloi.forEach((ctl, i) => {
         html += `<div class="col-6 mb-1">
-                    <p class="mb-1"><b>${String.fromCharCode(i + 65)}.</b> ${
+                <p class="mb-1"><b>${String.fromCharCode(i + 65)}.</b> ${
           ctl.noidungtl
         }</p>
-                </div>`;
+            </div>`;
       });
       html += `</div></div><div class="test-ans bg-primary rounded-bottom py-2 px-3 d-flex align-items-center"><p class="mb-0 text-white me-4">Đáp án của bạn:</p><div>`;
       question.cautraloi.forEach((ctl, i) => {
@@ -45,9 +43,9 @@ $(document).ready(function () {
         }" id="ctl-${ctl.macautl}" autocomplete="off" data-index="${
           index + 1
         }" data-macautl="${ctl.macautl}" ${check}>
-                        <label class="btn btn-light rounded-pill me-2 btn-answer" for="ctl-${
-                          ctl.macautl
-                        }">${String.fromCharCode(i + 65)}</label>`;
+                    <label class="btn btn-light rounded-pill me-2 btn-answer" for="ctl-${
+                      ctl.macautl
+                    }">${String.fromCharCode(i + 65)}</label>`;
       });
       html += `</div></div></div>`;
     });
@@ -169,7 +167,9 @@ $(document).ready(function () {
     });
   });
 
+  var endTime = -1;
   getTimeTest();
+
   function getTimeTest() {
     let dethi = $("#dethicontent").data("id");
     $.ajax({
