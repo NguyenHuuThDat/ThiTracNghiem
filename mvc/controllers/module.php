@@ -135,3 +135,49 @@ class Module extends Controller
             echo $result['mamoi'];
         }
     }
+    public function getSvList() 
+    {
+        AuthCore::checkAuthentication();
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $manhom = $_POST['manhom'];
+            $result = $this->nhomModel->getSvList($manhom);
+            echo json_encode($result);
+        }
+    }
+
+
+    public function addSV()
+    {
+        AuthCore::checkAuthentication();
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $manhom = $_POST['manhom'];
+            $mssv = $_POST['mssv'];
+            $hoten = $_POST['hoten'];
+            $password = $_POST['password'];
+            $result = $this->nhomModel->addSV($mssv,$hoten,$password);
+            $joinGroup = $this->nhomModel->join($manhom,$mssv);
+            echo $joinGroup;
+        }
+    }
+
+    public function addSvGroup(){
+        AuthCore::checkAuthentication();
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $manhom = $_POST['manhom'];
+            $mssv = $_POST['mssv'];
+            $joinGroup = $this->nhomModel->join($manhom,$mssv);
+            echo ($joinGroup);
+        }
+    }
+
+    public function checkAcc()
+    {
+        AuthCore::checkAuthentication();
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $manhom = $_POST['manhom'];
+            $mssv = $_POST['mssv'];
+            $result = $this->nhomModel->checkAcc($mssv,$manhom);
+            echo $result;
+        }
+    }
+    
