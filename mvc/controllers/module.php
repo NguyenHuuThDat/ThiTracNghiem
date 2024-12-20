@@ -121,6 +121,7 @@ class Module extends Controller {
             echo json_encode(false);
     }
 
+
     public function updateInvitedCode() {
         if($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("hocphan", "create")) {
             $manhom = $_POST['manhom'];
@@ -145,6 +146,7 @@ class Module extends Controller {
             echo json_encode($result);
         }
     }
+
 
     public function addSV() {
         AuthCore::checkAuthentication();
@@ -179,6 +181,7 @@ class Module extends Controller {
         }
     }
     
+
     public function exportExcelStudentS() {
         AuthCore::checkAuthentication();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
