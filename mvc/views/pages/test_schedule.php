@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" data-id="<?php echo $data["user_id"] ?>">
     <div class="row mb-4">
         <div class="col-6">
             <form action="#" id="search-form" onsubmit="return false;">
@@ -17,5 +17,7 @@
         </div>
     </div>
     <div class="list-test"></div>
-    <div class="row my-3"></div>
+    <div class="row my-3">
+        <?php if(isset($data["Plugin"]["pagination"])) require "./mvc/views/inc/pagination.php"?>
+    </div>
 </div>
