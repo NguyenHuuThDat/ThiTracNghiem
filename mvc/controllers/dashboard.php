@@ -1,11 +1,10 @@
 <?php
 
-class Dashboard extends Controller{
+class Dashboard extends Controller {
 
     public $nguoidung;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->nguoidung = $this->model("NguoiDungModel");
         parent::__construct();
     }
@@ -41,6 +40,7 @@ class Dashboard extends Controller{
             echo $result;
         }
     }
+
     public function updateEmail(){
         AuthCore::checkAuthentication();
         if ($_SERVER['REQUEST_METHOD'] == "POST"){
