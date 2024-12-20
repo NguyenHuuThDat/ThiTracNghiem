@@ -1,13 +1,11 @@
 <?php
-class Client extends Controller
-{
+class Client extends Controller {
 
     public $nhommodel;
     public $dethimodel;
     public $nguoidungmodel;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->nhommodel = $this->model("NhomModel");
         $this->dethimodel = $this->model("DeThiModel");
         $this->nguoidungmodel = $this->model("NguoiDungModel");
@@ -15,8 +13,7 @@ class Client extends Controller
         require_once "./mvc/core/Pagination.php";
     }
 
-    public function group()
-    {
+    public function group() {
         if (AuthCore::checkPermission("tghocphan", "join")) {
             $this->view("main_layout", [
                 "Page" => "client_group",
@@ -36,8 +33,7 @@ class Client extends Controller
         }
     }
 
-    public function test()
-    {
+    public function test() {
         if (AuthCore::checkPermission("tgthi", "join")) {
             $this->view("main_layout", [
                 "Page" => "test_schedule",
@@ -54,51 +50,48 @@ class Client extends Controller
     }
 
     // /client/test pagination
-    public function getQuery($filter, $input, $args)
-    {
+    public function getQuery($filter, $input, $args) {
         AuthCore::checkAuthentication();
         $query = $this->dethimodel->getQuery($filter, $input, $args);
         return $query;
     }
 
-    public function joinGroup()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("tghocphan", "join")) {
+    public function joinGroup() {
+        if($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("tghocphan", "join")) {
             $mamoi = $_POST['mamoi'];
             $manguoidung = $_SESSION['user_id'];
             $result_manhom = $this->nhommodel->getIdFromInvitedCode($mamoi);
-            if ($result_manhom != null) {
+            if($result_manhom != null) {
                 $manhom = $result_manhom['manhom'];
-                $result = $this->nhommodel->join($manhom, $manguoidung);
-                if ($result) {
+                $result = $this->nhommodel->join($manhom,$manguoidung);
+                if($result) {
                     echo json_encode($this->nhommodel->getDetailGroup($manhom));
-                } else echo json_encode(1);
+                }
+                else echo json_encode(1);
             } else echo json_encode(0);
         }
     }
-
-    public function loadDataGroups()
-    {
+    
+    public function loadDataGroups() {
         AuthCore::checkAuthentication();
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
             $manguoidung = $_SESSION['user_id'];
             $hienthi = $_POST['hienthi'];
-            $result = $this->nhommodel->getAllGroup_User($manguoidung, $hienthi);
+            $result = $this->nhommodel->getAllGroup_User($manguoidung,$hienthi);
             echo json_encode($result);
         }
     }
 
-    public function getFriendList()
-    {
+    public function getFriendList() {
         AuthCore::checkAuthentication();
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
             $manguoidung = $_SESSION['user_id'];
             $manhom = $_POST['manhom'];
             $result = $this->nhommodel->getSvList($manhom);
             $index = -1;
             $i = 0;
-            while ($i <= count($result) && $index == -1) {
-                if ($result[$i]['id'] == $manguoidung) {
+            while($i <= count($result) && $index == -1) {
+                if($result[$i]['id'] == $manguoidung) {
                     $index = $i;
                 } else $i++;
             }
@@ -107,24 +100,23 @@ class Client extends Controller
         }
     }
 
-    public function hide()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("tghocphan", "join")) {
+    public function hide() {
+        if($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("tghocphan", "join")) {
             $manhom = $_POST['manhom'];
-            $giatri = $_POST['giatri'];
+            $giatri =$_POST['giatri'];
             $manguoidung = $_SESSION['user_id'];
-            $result = $this->nhommodel->sv_hide($manhom, $manguoidung, $giatri);
+            $result = $this->nhommodel->sv_hide($manhom,$manguoidung,$giatri);
             echo $result;
         } else echo json_encode(false);
     }
 
-    public function delete()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("tghocphan", "join")) {
+    public function delete() {
+        if($_SERVER["REQUEST_METHOD"] == "POST" && AuthCore::checkPermission("tghocphan", "join")) {
             $manhom = $_POST['manhom'];
             $manguoidung = $_SESSION['user_id'];
-            $result = $this->nhommodel->SVDelete($manhom, $manguoidung);
+            $result = $this->nhommodel->SVDelete($manhom,$manguoidung);
             echo $result;
         } else echo json_encode(false);
-    }
+    }    
 }
+?>
