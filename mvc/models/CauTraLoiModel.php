@@ -1,7 +1,6 @@
 <?php
-class CauTraLoiModel extends DB{
-    public function create($macauhoi, $noidungtl, $ladapan)
-    {
+class CauTraLoiModel extends DB {
+    public function create($macauhoi, $noidungtl, $ladapan) {
         $valid = true;
         $sql = "INSERT INTO `cautraloi`(`macautl`,`macauhoi`, `noidungtl`, `ladapan`) VALUES (NULL,$macauhoi,'$noidungtl','$ladapan')";
         $result = mysqli_query($this->con, $sql);
@@ -9,8 +8,7 @@ class CauTraLoiModel extends DB{
         return $valid;
     }
 
-    public function update($macautl, $macauhoi, $noidungtl, $ladapan)
-    {
+    public function update($macautl, $macauhoi, $noidungtl, $ladapan) {
         $valid = true;
         $sql = "UPDATE `cautraloi` SET `macauhoi`=$macauhoi,`noidungtl`='$noidungtl',`ladapan`='$ladapan' WHERE `macautl`='$macautl'";
         $result = mysqli_query($this->con, $sql);
@@ -18,8 +16,7 @@ class CauTraLoiModel extends DB{
         return $valid;
     }
 
-    public function delete($macautl)
-    {
+    public function delete($macautl) {
         $valid = true;
         $sql = "DELETE FROM `cautraloi` WHERE `macautl` = $macautl";
         $result = mysqli_query($this->con, $sql);
@@ -27,8 +24,7 @@ class CauTraLoiModel extends DB{
         return $valid;
     }
 
-    public function getAll($macauhoi)
-    {
+    public function getAll($macauhoi) {
         $sql = "SELECT * FROM `cautraloi` WHERE `macauhoi` = $macauhoi";
         $result = mysqli_query($this->con,$sql);
         $rows = array();
@@ -38,8 +34,7 @@ class CauTraLoiModel extends DB{
         return $rows;
     }
 
-    public function getAllWithoutAnswer($macauhoi)
-    {
+    public function getAllWithoutAnswer($macauhoi) {
         $sql = "SELECT `macautl`, `noidungtl` FROM `cautraloi` WHERE `macauhoi` = $macauhoi";
         $result = mysqli_query($this->con,$sql);
         $rows = array();
@@ -49,15 +44,13 @@ class CauTraLoiModel extends DB{
         return $rows;
     }
 
-    public function getById($macautl)
-    {
+    public function getById($macautl) {
         $sql = "SELECT * FROM `cautraloi` WHERE `macautl` = $macautl";
         $result = mysqli_query($this->con,$sql);
         return mysqli_fetch_assoc($result);
     }
 
-    public function deletebyanswer($macauhoi)
-    {
+    public function deletebyanswer($macauhoi) {
         $valid = true;
         $sql = "DELETE FROM `cautraloi` WHERE `macauhoi` = $macauhoi";
         $result = mysqli_query($this->con, $sql);
@@ -65,8 +58,7 @@ class CauTraLoiModel extends DB{
         return $valid;
     }
 
-    public function getAnswersForMultipleQuestions($arr_question_id)
-    {
+    public function getAnswersForMultipleQuestions($arr_question_id) {
         $list = implode(", ", $arr_question_id);
         $sql = "SELECT * FROM cautraloi WHERE macauhoi IN ($list)";
         $result = mysqli_query($this->con,$sql);
@@ -76,6 +68,5 @@ class CauTraLoiModel extends DB{
         }
         return $rows;
     }
-
 }
 ?>
