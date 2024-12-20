@@ -1,14 +1,12 @@
 <?php
-class CauHoiModel extends DB{
-    public function create($noidung, $dokho, $mamonhoc, $machuong, $nguoitao)
-    {
+class CauHoiModel extends DB {
+    public function create($noidung, $dokho, $mamonhoc, $machuong, $nguoitao) {
         $sql = "INSERT INTO `cauhoi`(`noidung`, `dokho`, `mamonhoc`, `machuong`, `nguoitao`) VALUES ('$noidung','$dokho','$mamonhoc','$machuong','$nguoitao')";
         $result = mysqli_query($this->con, $sql);
         return $this->con;
     }
 
-    public function update($macauhoi, $noidung, $dokho, $mamonhoc, $machuong, $nguoitao)
-    {
+    public function update($macauhoi, $noidung, $dokho, $mamonhoc, $machuong, $nguoitao) {
         $valid = true;
         $sql = "UPDATE `cauhoi` SET `noidung`='$noidung',`dokho`='$dokho',`mamonhoc`='$mamonhoc',`machuong`='$machuong',`nguoitao`='$nguoitao' WHERE `macauhoi`=$macauhoi";
         $result = mysqli_query($this->con, $sql);
@@ -16,8 +14,7 @@ class CauHoiModel extends DB{
         return $valid;
     }
 
-    public function delete($macauhoi)
-    {
+    public function delete($macauhoi) {
         $valid = true;
         $sql = "UPDATE `cauhoi` SET `trangthai`='0' WHERE `macauhoi`= $macauhoi";
         $result = mysqli_query($this->con, $sql);
@@ -25,8 +22,7 @@ class CauHoiModel extends DB{
         return $valid;
     }
 
-    public function getAll()
-    {
+    public function getAll() {
         $sql = "SELECT * FROM cauhoi JOIN monhoc on  cauhoi.mamonhoc = monhoc.mamonhoc limit 5";
         $result = mysqli_query($this->con,$sql);
         $rows = array();
@@ -36,22 +32,20 @@ class CauHoiModel extends DB{
         return $rows;
     }
 
-    public function getById($macauhoi)
-    {
+    public function getById($macauhoi) {
         $sql = "SELECT * FROM `cauhoi` WHERE `macauhoi` = $macauhoi";
         $result = mysqli_query($this->con,$sql);
         return mysqli_fetch_assoc($result);
     }
 
-    public function getAllBySubject($mamonhoc)
-    {
+    public function getAllBySubject($mamonhoc) {
         $sql = "SELECT * FROM `cauhoi` WHERE `mamonhoc` = $mamonhoc";
         $result = mysqli_query($this->con,$sql);
         return mysqli_fetch_assoc($result);
     }
 
     public function getTotalPage($content,$selected){
-        switch($selected){
+        switch($selected) {
             case "Tất cả": $sql = "SELECT * FROM cauhoi where noidung like '%$content%'"; 
             break;
             case "Môn học": $sql = "SELECT * FROM cauhoi where noidung like '%$content%'"; 
@@ -65,8 +59,7 @@ class CauHoiModel extends DB{
         echo $data;
     }
 
-    public function getQuestionBySubject($mamonhoc, $machuong, $dokho, $content, $page)
-    {
+    public function getQuestionBySubject($mamonhoc, $machuong, $dokho, $content, $page) {
         $limit = 10;
         $offset = ($page - 1) * $limit;
         $sql = "SELECT macauhoi, noidung, dokho, machuong FROM cauhoi WHERE mamonhoc = '$mamonhoc'";
@@ -82,8 +75,7 @@ class CauHoiModel extends DB{
         return $rows;
     }
 
-    public function getTotalPageQuestionBySubject($mamonhoc, $machuong, $dokho, $content)
-    {
+    public function getTotalPageQuestionBySubject($mamonhoc, $machuong, $dokho, $content) {
         $limit = 10;
         $sql = "SELECT macauhoi, noidung, dokho, machuong FROM cauhoi WHERE mamonhoc = '$mamonhoc' WHERE trangthai='1'";
         $sql .= $machuong == 0 ? "" : " AND machuong = $machuong";
@@ -133,8 +125,7 @@ class CauHoiModel extends DB{
         return $query;
     }
 
-    public function getsoluongcauhoi($chuong,$monhoc,$dokho)
-    {
+    public function getsoluongcauhoi($chuong,$monhoc,$dokho) {
         $c = "";
         $mh = null;
         if(count($chuong) != 0) {
