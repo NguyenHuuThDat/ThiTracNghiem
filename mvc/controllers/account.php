@@ -1,17 +1,14 @@
 <?php
 
-class Account extends Controller
-{
+class Account extends Controller {
     public $nguoidung;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->nguoidung = $this->model("NguoiDungModel");
         parent::__construct();
     }
 
-    function default()
-    {
+    function default() {
         AuthCore::checkAuthentication();
         $this->view("main_layout", [
             "Page" => "account_setting",
@@ -28,8 +25,7 @@ class Account extends Controller
         ]);
     }
 
-    public function changePassword()
-    {
+    public function changePassword() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $matkhaucu = $_POST['matkhaucu'];
             $matkhaumoi = $_POST['matkhaumoi'];
@@ -44,8 +40,7 @@ class Account extends Controller
         }
     }
 
-    public function changeProfile()
-    {
+    public function changeProfile() {
         AuthCore::checkAuthentication();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = $_POST['email'];
@@ -72,8 +67,7 @@ class Account extends Controller
         }
     }
 
-    public function checkAllow()
-    {
+    public function checkAllow() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id = $_SESSION['user_id'];
             $email = $_POST['email'];
@@ -81,8 +75,7 @@ class Account extends Controller
         }
     }
 
-    public function uploadFile()
-    {
+    public function uploadFile() {
         AuthCore::checkAuthentication();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_FILES['file-img']['name'])) {
@@ -102,16 +95,14 @@ class Account extends Controller
         }
     }
 
-    public function getRole()
-    {
+    public function getRole() {
         AuthCore::checkAuthentication();
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             echo json_encode($_SESSION['user_role']);
         }
     }
 
-    public function check()
-    {
+    public function check() {
         echo "<pre>";
         print_r($_SESSION);
     }
