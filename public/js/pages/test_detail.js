@@ -361,7 +361,7 @@ $(document).ready(function () {
         var $a = $("<a>");
         $a.attr("href", response.file);
         $("body").append($a);
-        $a.attr("download", "Kết quả bài thi.xls");
+        $a.attr("download", "Kết quả bài thi.xlsx");
         $a[0].click();
         $a.remove();
       },
