@@ -1,9 +1,7 @@
 <?php
-
-class DeThiModel extends DB 
-{
-    public function create($monthi, $nguoitao, $tende, $thoigianthi, $thoigianbatdau, $thoigianketthuc, $hienthibailam, $xemdiemthi, $xemdapan, $troncauhoi, $trondapan, $nopbaichuyentab, $loaide, $socaude, $socautb, $socaukho, $chuong, $nhom)
-    {
+include "./mvc/models/CauTraLoiModel.php";
+class DeThiModel extends DB {
+    public function create($monthi, $nguoitao, $tende, $thoigianthi, $thoigianbatdau, $thoigianketthuc, $hienthibailam, $xemdiemthi, $xemdapan, $troncauhoi, $trondapan, $nopbaichuyentab, $loaide, $socaude, $socautb, $socaukho, $chuong, $nhom) {
         $sql = "INSERT INTO `dethi`(`monthi`, `nguoitao`, `tende`, `thoigianthi`, `thoigianbatdau`, `thoigianketthuc`, `hienthibailam`, `xemdiemthi`, `xemdapan`, `troncauhoi`, `trondapan`, `nopbaichuyentab`, `loaide`, `socaude`, `socautb`, `socaukho`) VALUES ('$monthi','$nguoitao','$tende','$thoigianthi','$thoigianbatdau','$thoigianketthuc','$hienthibailam','$xemdiemthi','$xemdapan','$troncauhoi','$trondapan','$nopbaichuyentab','$loaide','$socaude','$socautb','$socaukho')";
         $result = mysqli_query($this->con, $sql);
         if ($result) {
@@ -16,30 +14,8 @@ class DeThiModel extends DB
         } else return false;
     }
 
-    public function create_chuongdethi($made, $chuong)
-    {
-        $valid = true;
-        foreach ($chuong as $machuong) {
-            $sql = "INSERT INTO `dethitudong`(`made`, `machuong`) VALUES ('$made','$machuong')";
-            $result = mysqli_query($this->con, $sql);
-            if (!$result) $valid = false;
-        }
-        return $valid;
-    }
-
-    public function create_giaodethi($made, $nhom)
-    {
-        $valid = true;
-        foreach ($nhom as $manhom) {
-            $sql = "INSERT INTO `giaodethi`(`made`, `manhom`) VALUES ('$made','$manhom')";
-            $result = mysqli_query($this->con, $sql);
-            if (!$result) $valid = false;
-        }
-        return $valid;
-    }
-
-    public function create_dethi_auto($made, $monhoc, $chuong, $socaude, $socautb, $socaukho)
-    {
+    // 
+    public function create_dethi_auto($made, $monhoc, $chuong, $socaude, $socautb, $socaukho) {
         $valid = true;
         $sql_caude = "SELECT * FROM cauhoi ch join monhoc mh on ch.mamonhoc = mh.mamonhoc where ch.mamonhoc = $monhoc and ch.dokho = 1 and ";
         $sql_cautb = "SELECT * FROM cauhoi ch join monhoc mh on ch.mamonhoc = mh.mamonhoc where ch.mamonhoc = $monhoc and ch.dokho = 2 and ";
@@ -76,8 +52,7 @@ class DeThiModel extends DB
         return $data_cd;
     }
 
-    public function create_chuongdethi($made, $chuong)
-    {
+    public function create_chuongdethi($made, $chuong) {
         $valid = true;
         foreach ($chuong as $machuong) {
             $sql = "INSERT INTO `dethitudong`(`made`, `machuong`) VALUES ('$made','$machuong')";
@@ -87,8 +62,7 @@ class DeThiModel extends DB
         return $valid;
     }
 
-    public function update_chuongdethi($made, $chuong)
-    {
+    public function update_chuongdethi($made, $chuong) {
         $valid = true;
         $sql = "DELETE FROM `dethitudong` WHERE `made`='$made'";
         $result_del = mysqli_query($this->con, $sql);
@@ -97,8 +71,7 @@ class DeThiModel extends DB
         return $valid;
     }
 
-    public function create_giaodethi($made, $nhom)
-    {
+    public function create_giaodethi($made, $nhom) {
         $valid = true;
         foreach ($nhom as $manhom) {
             $sql = "INSERT INTO `giaodethi`(`made`, `manhom`) VALUES ('$made','$manhom')";
@@ -108,8 +81,7 @@ class DeThiModel extends DB
         return $valid;
     }
 
-    public function update_giaodethi($made, $nhom)
-    {
+    public function update_giaodethi($made, $nhom) {
         $valid = true;
         $sql = "DELETE FROM `giaodethi` WHERE `made`='$made'";
         $result_del = mysqli_query($this->con, $sql);
@@ -118,8 +90,7 @@ class DeThiModel extends DB
         return $valid;
     }
 
-    public function update($made, $monthi, $tende, $thoigianthi, $thoigianbatdau, $thoigianketthuc, $hienthibailam, $xemdiemthi, $xemdapan, $troncauhoi, $trondapan, $nopbaichuyentab, $loaide, $socaude, $socautb, $socaukho, $chuong, $nhom)
-    {
+    public function update($made, $monthi, $tende, $thoigianthi, $thoigianbatdau, $thoigianketthuc, $hienthibailam, $xemdiemthi, $xemdapan, $troncauhoi, $trondapan, $nopbaichuyentab, $loaide, $socaude, $socautb, $socaukho, $chuong, $nhom) {
         $valid = true;
         $sql = "UPDATE `dethi` SET `monthi`='$monthi',`tende`='$tende',`thoigianthi`='$thoigianthi',`thoigianbatdau`='$thoigianbatdau',`thoigianketthuc`='$thoigianketthuc',`hienthibailam`='$hienthibailam',`xemdiemthi`='$xemdiemthi',`xemdapan`='$xemdapan',`troncauhoi`='$troncauhoi',`trondapan`='$trondapan',`nopbaichuyentab`='$nopbaichuyentab',`loaide`='$loaide',`socaude`='$socaude',`socautb`='$socautb',`socaukho`='$socaukho' WHERE `made`='$made'";
         $result = mysqli_query($this->con, $sql);
@@ -132,8 +103,7 @@ class DeThiModel extends DB
         return $valid;
     }
 
-    public function delete($madethi)
-    {
+    public function delete($madethi) {
         $valid = true;
         $sql = "UPDATE `dethi` SET `trangthai`= 0 WHERE `made` = $madethi";
         $result = mysqli_query($this->con, $sql);
@@ -142,8 +112,7 @@ class DeThiModel extends DB
     }
 
     // Lấy đề thi mà người dùng tạo
-    public function getAll($nguoitao)
-    {
+    public function getAll($nguoitao) {
         $sql = "SELECT dethi.made, tende, monhoc.tenmonhoc, thoigianbatdau, thoigianketthuc, nhom.tennhom, namhoc, hocky
         FROM dethi, monhoc, giaodethi, nhom
         WHERE dethi.monthi = monhoc.mamonhoc AND dethi.made = giaodethi.made AND nhom.manhom = giaodethi.manhom AND nguoitao = $nguoitao AND dethi.trangthai = 1
@@ -173,8 +142,7 @@ class DeThiModel extends DB
     }
 
     // Lấy chi tiết đề thi
-    public function getById($made)
-    {
+    public function getById($made) {
         $sql_dethi = "SELECT dethi.*, monhoc.tenmonhoc FROM dethi, monhoc WHERE made = $made AND dethi.monthi = monhoc.mamonhoc";
         $result_dethi = mysqli_query($this->con, $sql_dethi);
         $dethi = mysqli_fetch_assoc($result_dethi);
@@ -196,8 +164,7 @@ class DeThiModel extends DB
     }
 
     // Lấy thông tin cơ bản của đề thi ()
-    public function getInfoTestBasic($made)
-    {
+    public function getInfoTestBasic($made) {
         $sql_dethi = "SELECT dethi.made, dethi.tende, dethi.thoigiantao,dethi.loaide,dethi.nguoitao,monhoc.mamonhoc, monhoc.tenmonhoc FROM dethi, monhoc WHERE made = $made AND dethi.monthi = monhoc.mamonhoc";
         $result_dethi = mysqli_query($this->con, $sql_dethi);
         $dethi = mysqli_fetch_assoc($result_dethi);
@@ -213,8 +180,7 @@ class DeThiModel extends DB
     }
 
     // Lấy đề thi của nhóm học phần
-    public function getListTestGroup($manhom)
-    {
+    public function getListTestGroup($manhom) {
         $sql = "SELECT dethi.made, dethi.tende, dethi.thoigianbatdau, dethi.thoigianketthuc
         FROM giaodethi, dethi
         WHERE manhom = '$manhom' AND giaodethi.made = dethi.made ORDER BY dethi.made DESC";
@@ -229,8 +195,7 @@ class DeThiModel extends DB
     }
 
     // Lấy câu hỏi của đề thi
-    public function getQuestionOfTest($made)
-    {
+    public function getQuestionOfTest($made) {
         $sql_dethi = "select * from dethi where made = '$made'";
         $data_dethi = mysqli_fetch_assoc(mysqli_query($this->con, $sql_dethi));
         $question = array();
@@ -288,8 +253,7 @@ class DeThiModel extends DB
     }
 
 
-    public function getQuestionTestAuto($made)
-    {
+    public function getQuestionTestAuto($made) {
         $sql_dethi = "select * from dethi where made = '$made'";
         $data_dethi = mysqli_fetch_assoc(mysqli_query($this->con, $sql_dethi));
         $socaude = $data_dethi['socaude'];
@@ -331,8 +295,7 @@ class DeThiModel extends DB
     }
 
     // Tạo đề thủ công
-    public function getQuestionOfTestManual($made)
-    {
+    public function getQuestionOfTestManual($made) {
         $sql = "SELECT CTDT.macauhoi, noidung, dokho, thutu FROM chitietdethi CTDT, cauhoi CH WHERE CTDT.macauhoi = CH.macauhoi AND CTDT.made = $made ORDER BY thutu ASC";
         $result = mysqli_query($this->con, $sql);
         $rows = array();
@@ -345,8 +308,7 @@ class DeThiModel extends DB
     }
 
     // Lấy chi tiết đề thi của sinh viên
-    public function getResultDetail($makq)
-    {
+    public function getResultDetail($makq) {
         $sql = "SELECT cauhoi.macauhoi,cauhoi.noidung,cauhoi.dokho,chitietketqua.dapanchon FROM chitietketqua, cauhoi WHERE makq= '$makq' AND chitietketqua.macauhoi = cauhoi.macauhoi";
         $result = mysqli_query($this->con, $sql);
         $rows = array();
@@ -359,8 +321,7 @@ class DeThiModel extends DB
     }
 
     // Lấy thời gian kết thúc đề thi
-    public function getTimeTest($dethi, $nguoidung)
-    {
+    public function getTimeTest($dethi, $nguoidung) {
         $sql = "Select * from ketqua where made = '$dethi' and manguoidung = '$nguoidung'";
         $sql_dethi = "select * from dethi where made = '$dethi'";
         $result_dethi = mysqli_query($this->con, $sql_dethi);
@@ -394,8 +355,7 @@ class DeThiModel extends DB
         return $rows;
     }
 
-    public function checkStudentAllowed($manguoidung, $madethi)
-    {
+    public function checkStudentAllowed($manguoidung, $madethi) {
         $valid = true;
         $sql = "SELECT *
         FROM giaodethi, chitietnhom
@@ -405,8 +365,7 @@ class DeThiModel extends DB
         return $valid;
     }
 
-    public function getQuery($filter, $input, $args)
-    {
+    public function getQuery($filter, $input, $args) {
         $query = "";
         if (isset($args["custom"]["function"])) {
             $func = $args["custom"]["function"];
@@ -477,8 +436,7 @@ class DeThiModel extends DB
         return $query;
     }
 
-    public function getTestsGroupWithUserResult($manhom, $manguoidung)
-    {
+    public function getTestsGroupWithUserResult($manhom, $manguoidung) {
         $sql = "SELECT T1.*, diemthi FROM (SELECT DT.made, tende, thoigianbatdau, thoigianketthuc FROM dethi DT, giaodethi GDT WHERE DT.made = GDT.made AND DT.trangthai = 1 AND manhom = $manhom) T1 LEFT JOIN (SELECT KQ.made, diemthi FROM ketqua KQ, giaodethi GDT WHERE KQ.made = GDT.made AND manguoidung = '$manguoidung' AND GDT.manhom = $manhom) T2 ON T1.made = T2.made ORDER BY made DESC";
         $result = mysqli_query($this->con, $sql);
         $rows = array();
