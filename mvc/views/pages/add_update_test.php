@@ -31,10 +31,10 @@
                     <label class="form-check-label" for="xemda">Xem đáp án khi thi xong</label>
                 </div> -->
 
-                <div class="form-check form-switch mb-2">
+                <!-- <div class="form-check form-switch mb-2">
                     <input class="form-check-input" type="checkbox" id="xemda" name="xemda">
                     <label class="form-check-label" for="xemda">Xem đáp án khi thi xong</label>
-                </div>
+                </div> -->
 
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input" type="checkbox" id="xembailam" name="xembailam">
