@@ -1,9 +1,6 @@
 <?php
-class NguoiDungModel extends DB
-{
-
-    public function create($id, $email, $fullname, $password, $ngaysinh, $gioitinh, $role, $trangthai)
-    {
+class NguoiDungModel extends DB {
+    public function create($id, $email, $fullname, $password, $ngaysinh, $gioitinh, $role, $trangthai) {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO `nguoidung`(`id`, `email`,`hoten`, `gioitinh`,`ngaysinh`,`matkhau`,`trangthai`, `manhomquyen`) VALUES ('$id','$email','$fullname','$gioitinh','$ngaysinh','$password',$trangthai, $role)";
         $check = true;
@@ -14,8 +11,7 @@ class NguoiDungModel extends DB
         return $check;
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         $check = true;
         $sql = "DELETE FROM `nguoidung` WHERE `id`='$id'";
         $result = mysqli_query($this->con, $sql);
@@ -23,8 +19,7 @@ class NguoiDungModel extends DB
         return $check;
     }
 
-    public function update($id, $email, $fullname, $password, $ngaysinh, $gioitinh, $role, $trangthai)
-    {
+    public function update($id, $email, $fullname, $password, $ngaysinh, $gioitinh, $role, $trangthai) {
         $querypass = '';
         if ($password != '') {
             $passwordd = password_hash($password, PASSWORD_DEFAULT);
@@ -38,8 +33,7 @@ class NguoiDungModel extends DB
     }
 
     // cập nhật thông tin cá nhân
-    public function updateProfile($fullname, $gioitinh, $ngaysinh, $email, $id)
-    {
+    public function updateProfile($fullname, $gioitinh, $ngaysinh, $email, $id) {
         $sql = "UPDATE `nguoidung` SET `email` = '$email',`hoten`='$fullname',`gioitinh`='$gioitinh',`ngaysinh`='$ngaysinh'WHERE `id`='$id'";
         $check = true;
         $result = mysqli_query($this->con, $sql);
@@ -48,8 +42,7 @@ class NguoiDungModel extends DB
     }
 
     // cập nhật ảnh đại diện
-    public function uploadFile($id, $tmpName, $imageExtension, $validImageExtension, $name)
-    {
+    public function uploadFile($id, $tmpName, $imageExtension, $validImageExtension, $name) {
         $check = true;
 
         if (!in_array($imageExtension, $validImageExtension)) {
@@ -67,8 +60,7 @@ class NguoiDungModel extends DB
     }
 
 
-    public function getAll()
-    {
+    public function getAll() {
         $sql = "SELECT nguoidung.*, nhomquyen.`tennhomquyen`
         FROM nguoidung, nhomquyen
         WHERE nguoidung.`manhomquyen` = nhomquyen.`manhomquyen`";
@@ -80,15 +72,13 @@ class NguoiDungModel extends DB
         return $rows;
     }
 
-    public function getById($id)
-    {
+    public function getById($id) {
         $sql = "SELECT * FROM `nguoidung` WHERE `id` = '$id'";
         $result = mysqli_query($this->con, $sql);
         return mysqli_fetch_assoc($result);
     }
 
-    public function getByEmail($email)
-    {
+    public function getByEmail($email) {
         $sql = "SELECT email,otp FROM `nguoidung` WHERE `email` = '$email'";
         $result = mysqli_query($this->con, $sql);
         if ($result) {
@@ -98,16 +88,14 @@ class NguoiDungModel extends DB
         }
     }
 
-    public function checkOpt($email, $opt)
-    {
+    public function checkOpt($email, $opt) {
         $sql = "SELECT email,otp FROM `nguoidung` WHERE `email` = '$email' AND `otp` = '$opt'";
         $result = mysqli_query($this->con, $sql);
         return $result->num_rows;
     }
 
 
-    public function changePassword($id, $new_password)
-    {
+    public function changePassword($id, $new_password) {
         $new_password = password_hash($new_password, PASSWORD_DEFAULT);
         $sql = "UPDATE `nguoidung` SET `matkhau`='$new_password' WHERE `id` = '$id'";
         $check = true;
@@ -116,15 +104,13 @@ class NguoiDungModel extends DB
         return $check;
     }
 
-    public function checkPassword($masv, $password)
-    {
+    public function checkPassword($masv, $password) {
         $user = $this->getById($masv);
         $result = password_verify($password, $user['matkhau']);
         return $result;
     }
 
-    public function checkLogin($masv, $password)
-    {
+    public function checkLogin($masv, $password) {
         $user = $this->getById($masv);
         if ($user == '') {
             return json_encode(["message" => "Tài khoản không tồn tại !", "valid" => "false"]);
@@ -147,8 +133,7 @@ class NguoiDungModel extends DB
         }
     }
 
-    public function updateToken($masv, $token)
-    {
+    public function updateToken($masv, $token) {
         $valid = true;
         $sql = "UPDATE `nguoidung` SET `token`='$token' WHERE `id` = '$masv'";
         $result = mysqli_query($this->con, $sql);
@@ -156,8 +141,7 @@ class NguoiDungModel extends DB
         return $valid;
     }
 
-    public function validateToken($token)
-    {
+    public function validateToken($token) {
         $sql = "SELECT * FROM `nguoidung` WHERE `token` = '$token'";
         $result = mysqli_query($this->con, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -172,8 +156,7 @@ class NguoiDungModel extends DB
         return false;
     }
 
-    public function getRole($manhomquyen)
-    {
+    public function getRole($manhomquyen) {
         $sql = "SELECT chucnang, hanhdong FROM chitietquyen WHERE manhomquyen = $manhomquyen";
         $result = mysqli_query($this->con, $sql);
         $rows = array();
@@ -193,8 +176,7 @@ class NguoiDungModel extends DB
         return $roles;
     }
 
-    public function logout()
-    {
+    public function logout() {
         setcookie("token", "", time() - 10, '/');
         $id = $_SESSION['user_id'];
         $sql = "UPDATE `nguoidung` SET `token`= NULL WHERE `id` = '$id'";
@@ -203,15 +185,13 @@ class NguoiDungModel extends DB
         return $result;
     }
 
-    public function updateOpt($email, $otp)
-    {
+    public function updateOpt($email, $otp) {
         $sql = "UPDATE `nguoidung` SET `otp`= $otp WHERE `email`='$email'";
         $result = mysqli_query($this->con, $sql);
         return $result;
     }
 
-    function addFile($data, $pass)
-    {
+    function addFile($data, $pass) {
         $check = true;
         foreach ($data as $user) {
             $fullname = $user['fullname'];
@@ -230,8 +210,7 @@ class NguoiDungModel extends DB
         return $check;
     }
 
-    function addFileGroup($data, $pass, $group)
-    {
+    function addFileGroup($data, $pass, $group) {
         $check = true;
         foreach ($data as $user) {
             $fullname = $user['fullname'];
@@ -251,8 +230,7 @@ class NguoiDungModel extends DB
         return $check;
     }
 
-    public function join($manhom, $manguoidung)
-    {
+    public function join($manhom, $manguoidung) {
         $valid = true;
         $sql = "INSERT INTO `chitietnhom`(`manhom`, `manguoidung`) VALUES ('$manhom','$manguoidung')";
         $result = mysqli_query($this->con, $sql);
@@ -265,8 +243,7 @@ class NguoiDungModel extends DB
         return $valid;
     }
 
-    public function updateSiso($manhom)
-    {
+    public function updateSiso($manhom) {
         $valid = true;
         $sql = "UPDATE `nhom` SET `siso`= (SELECT count(*) FROM `chitietnhom` where manhom = $manhom ) WHERE `manhom` = $manhom";
         $result = mysqli_query($this->con, $sql);
@@ -276,21 +253,19 @@ class NguoiDungModel extends DB
         return $valid;
     }
 
-    public function getQuery($filter, $input, $args)
-    {
+    public function getQuery($filter, $input, $args) {
         $query = "SELECT ND.*, NQ.tennhomquyen FROM nguoidung ND, nhomquyen NQ WHERE ND.manhomquyen = NQ.manhomquyen";
         if (isset($filter['role'])) {
             $query .= " AND ND.manhomquyen = " . $filter['role'];
         }
         if ($input) {
-            $query = $query . " AND (ND.hoten LIKE N'%${input}%' OR ND.id LIKE '%${input}%')";
+            $query = $query . " AND (ND.hoten LIKE N'%$input%' OR ND.id LIKE '%$input%')";
         }
         $query = $query . " ORDER BY id ASC";
         return $query;
     }
 
-    public function checkUser($mssv, $email)
-    {
+    public function checkUser($mssv, $email) {
         $sql = "SELECT * FROM `nguoidung` WHERE `id` = $mssv OR `email` = '$email'";
         $result = mysqli_query($this->con, $sql);
         $rows = array();
@@ -300,31 +275,27 @@ class NguoiDungModel extends DB
         return $rows;
     }
 
-    public function checkEmail($id)
-    {
+    public function checkEmail($id) {
         $sql = "SELECT * FROM nguoidung where id = '$id'";
         $result = mysqli_query($this->con, $sql);
         $data = mysqli_fetch_assoc($result);
         return $data['email'];
     }
 
-    public function checkEmailExist($email)
-    {
+    public function checkEmailExist($email) {
         $sql = "SELECT * FROM nguoidung where email = '$email'";
         $result = mysqli_query($this->con, $sql);
         $row = $result->num_rows;
         return $row;
     }
 
-    public function updateEmail($id, $email)
-    {
+    public function updateEmail($id, $email) {
         $sql = "UPDATE `nguoidung` SET `email`='$email' WHERE `id`='$id'";
         $result = mysqli_query($this->con, $sql);
         return $result;
     }
 
-    public function getAllRoles()
-    {
+    public function getAllRoles() {
         $sql = "SELECT * FROM nhomquyen WHERE trangthai = 1";
         $result = mysqli_query($this->con, $sql);
         $rows = array();

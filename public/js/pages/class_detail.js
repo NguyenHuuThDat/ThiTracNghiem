@@ -330,7 +330,7 @@ $(document).ready(function () {
           getGroupSize(manhom);
           mainPagePagination.getPagination(mainPagePagination.option, mainPagePagination.valuePage.curPage);
           $("#modal-add-user").modal("hide");
-          Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-times me-1', message: `Thêm người dùng thành công!` });
+          Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: `Thêm người dùng thành công!` });
         }
       }
     });
@@ -351,7 +351,7 @@ $(document).ready(function () {
         success: function (response) {
           if (response) {
             $("#modal-add-user").modal("hide");
-            Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-times me-1', message: `Thêm người dùng thành công!` });
+            Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: `Thêm người dùng thành công!` });
             getGroupSize(manhom);
             mainPagePagination.getPagination(mainPagePagination.option, mainPagePagination.valuePage.curPage);
           }
@@ -476,7 +476,7 @@ $(document).ready(function () {
         mainPagePagination.getPagination(mainPagePagination.option, mainPagePagination.valuePage.curPage);
         $("#ps_user_group").val("");
         $("#file-cau-hoi").val("");
-        Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-times me-1', message: `Thêm người dùng thành công!` });
+        Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: `Thêm người dùng thành công!` });
         $("#modal-add-user").modal("hide");
       },
     });

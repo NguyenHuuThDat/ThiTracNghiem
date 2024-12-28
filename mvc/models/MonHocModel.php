@@ -63,7 +63,8 @@ class MonHocModel extends DB {
     public function getQuery($filter, $input, $args) {
         $query = "SELECT * FROM `monhoc` WHERE `trangthai` = 1";
         if ($input) {
-            $query = $query . " AND (`monhoc`.`tenmonhoc` LIKE N'%${input}%' OR `monhoc`.`mamonhoc` LIKE '%${input}%')";
+            // $query = $query . " AND (`monhoc`.`tenmonhoc` LIKE N'%${input}%' OR `monhoc`.`mamonhoc` LIKE '%${input}%')";
+            $query .= " AND (`monhoc`.`tenmonhoc` LIKE N'%" . $input . "%' OR `monhoc`.`mamonhoc` LIKE '%" . $input . "%')";
         }
         return $query;
     }

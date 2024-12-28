@@ -249,7 +249,7 @@ $(document).ready(function () {
         swalWithBootstrapButtons
         .fire({
             title: "Are you sure?",
-            text: "Bạn có chắc chắn muốn huỷ ẩn hết các nhóm môn học này không!",
+            text: "Bạn có chắc chắn muốn huỷ ẩn hết các nhóm môn học này không?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Chắc chắn!",
@@ -270,12 +270,12 @@ $(document).ready(function () {
     $(document).on("click", ".btn-delete-group", function () {
         swalWithBootstrapButtons
         .fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: "Bạn chắc chắn xóa?",
+            text: "Bạn sẽ không thể hoàn tác việc này",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel!",
+            confirmButtonText: "Xóa",
+            cancelButtonText: "Hủy",
         })
         .then((result) => {
             if (result.isConfirmed) {

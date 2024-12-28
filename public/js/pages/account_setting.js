@@ -123,8 +123,7 @@ $("#dm-profile-edit-avatar").change(function (e) {
       `<img class="img-avatar img-avatar128 img-avatar-thumb" src="${url}" alt="${file.name}">`
     );
     avatarAccount.html(
-      `<img class="img-avatar img-avatar48 img-avatar-thumb" src="${url}"
-                alt="${file.name}">`
+      `<img class="img-avatar img-avatar48 img-avatar-thumb" src="${url}" alt="${file.name}">`
     );
   };
 });

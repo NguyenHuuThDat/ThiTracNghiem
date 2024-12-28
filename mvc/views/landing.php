@@ -273,7 +273,7 @@
                     <div class="pt-7 pb-5">
                         <div class="position-relative">
                             <h2 class="fw-bold mb-2 text-center invisible" data-toggle="appear" data-class="animated fadeInDown" data-offset="-200">
-                                <span class="text-primary">Đội ngũ</span> phát triển
+                                <span class="text-primary">Nhóm</span> phát triển
                             </h2>
 
                             <h3 class="h4 fw-medium text-muted text-center mb-5 invisible" data-toggle="appear" data-class="animated fadeInDown" data-offset="-200">
@@ -286,8 +286,7 @@
                                 <div class="p-3 invisible" data-toggle="appear" data-class="animated flipInX">
                                     <a class="block block-rounded bg-gd-primary text-center" href="https://github.com/NguyenHuuThDat/">
                                         <div class="block-content block-content-full bg-gd-sea">
-                                            <img class="img-avatar img-avatar-thumb"
-                                                src="./public/media/avatars/ava0.jpg" alt="avatar">
+                                            <img class="img-avatar img-avatar-thumb" src="./public/media/avatars/ava0.jpg" alt="avatar">
                                         </div>
                                         
                                         <div class="block-content block-content-full bg-black-10">
@@ -300,8 +299,7 @@
                                 <div class="p-3 invisible" data-toggle="appear" data-class="animated flipInX">
                                     <a class="block block-rounded bg-gd-primary text-center" href="https://github.com/hanhan1310">
                                         <div class="block-content block-content-full bg-gd-sea">
-                                            <img class="img-avatar img-avatar-thumb"
-                                                src="./public/media/avatars/ava0.jpg" alt="avatar">
+                                            <img class="img-avatar img-avatar-thumb" src="./public/media/avatars/ava0.jpg" alt="avatar">
                                         </div>
 
                                         <div class="block-content block-content-full bg-black-10">
@@ -314,8 +312,7 @@
                                 <div class="p-3 invisible" data-toggle="appear" data-class="animated flipInX">
                                     <a class="block block-rounded bg-gd-primary text-center" href="https://github.com/Sotatek-NhiNguyen2">
                                         <div class="block-content block-content-full bg-gd-sea">
-                                            <img class="img-avatar img-avatar-thumb"
-                                                src="./public/media/avatars/ava0.jpg" alt="avatar">
+                                            <img class="img-avatar img-avatar-thumb" src="./public/media/avatars/ava0.jpg" alt="avatar">
                                         </div>
 
                                         <div class="block-content block-content-full bg-black-10">
@@ -328,8 +325,7 @@
                                 <div class="p-3 invisible" data-toggle="appear" data-class="animated flipInX">
                                     <a class="block block-rounded bg-gd-primary text-center" href="https://github.com/Gwolf0410">
                                         <div class="block-content block-content-full bg-gd-sea">
-                                            <img class="img-avatar img-avatar-thumb"
-                                                src="./public/media/avatars/ava0.jpg" alt="avatar">
+                                            <img class="img-avatar img-avatar-thumb" src="./public/media/avatars/ava0.jpg" alt="avatar">
                                         </div>
 
                                         <div class="block-content block-content-full bg-black-10">
@@ -342,8 +338,7 @@
                                 <div class="p-3 invisible" data-toggle="appear" data-class="animated flipInX">
                                     <a class="block block-rounded bg-gd-primary text-center" href="https://github.com/ThanhHien0903">
                                         <div class="block-content block-content-full bg-gd-sea">
-                                            <img class="img-avatar img-avatar-thumb"
-                                                src="./public/media/avatars/ava0.jpg" alt="avatar">
+                                            <img class="img-avatar img-avatar-thumb" src="./public/media/avatars/ava0.jpg" alt="avatar">
                                         </div>
 
                                         <div class="block-content block-content-full bg-black-10">

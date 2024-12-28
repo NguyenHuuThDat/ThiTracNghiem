@@ -1,8 +1,7 @@
 <?php
 class KetQuaModel extends DB{
     // 1. Phương thức khởi tạo kết quả
-    public function start($made, $manguoidung)
-    {
+    public function start($made, $manguoidung) {
         $valid = true;
         $sql = "INSERT INTO `ketqua`(`made`, `manguoidung`) VALUES ('$made','$manguoidung')";
         $result = mysqli_query($this->con, $sql);
@@ -10,8 +9,7 @@ class KetQuaModel extends DB{
         return $valid;
     }
 
-    public function updateChangeTab($made, $manguoidung)
-    {
+    public function updateChangeTab($made, $manguoidung) {
         $solanchuyentab = $this->getChangeTab($made, $manguoidung)['solanchuyentab'];
         $sql = "UPDATE `ketqua` SET `solanchuyentab`='$solanchuyentab' WHERE `made`='$made' AND `manguoidung`='$manguoidung'";
         $valid = true;
@@ -26,8 +24,7 @@ class KetQuaModel extends DB{
         return mysqli_fetch_assoc($result);
     }
 
-    public function getMaKQ($made, $manguoidung)
-    {
+    public function getMaKQ($made, $manguoidung) {
         $sql = "SELECT * FROM `ketqua` WHERE `made` = '$made' AND `manguoidung` = '$manguoidung'";
         $result = mysqli_query($this->con, $sql);
         return mysqli_fetch_assoc($result);
@@ -130,8 +127,7 @@ class KetQuaModel extends DB{
         return $arr_result;
     } 
 
-    public function getMarkOfOneTest($manhom,$made)
-    {
+    public function getMarkOfOneTest($manhom,$made) {
         $sql = "SELECT DISTINCT giaodethi.made,chitietnhom.manguoidung,ketqua.diemthi
         FROM giaodethi, chitietnhom LEFT JOIN ketqua ON chitietnhom.manguoidung = ketqua.manguoidung AND ketqua.made = $made 
         WHERE giaodethi.manhom = chitietnhom.manhom AND giaodethi.manhom = $manhom AND giaodethi.made = $made";
@@ -144,8 +140,7 @@ class KetQuaModel extends DB{
     }
 
     // Lấy thông tin đề thi, kết quả của sinh viên để xuất file PDF
-    public function getInfoPrintPdf($makq)
-    {
+    public function getInfoPrintPdf($makq) {
         $sql = "SELECT DISTINCT ketqua.made, tende, tenmonhoc, mamonhoc, thoigianthi, manguoidung, hoten, socaudung,(socaude + socautb + socaukho) AS tongsocauhoi , diemthi
         FROM chitietketqua, ketqua, dethi, monhoc, nguoidung
         WHERE chitietketqua.makq = '$makq' AND chitietketqua.makq = ketqua.makq AND ketqua.manguoidung = nguoidung.id AND ketqua.made = dethi.made AND dethi.monthi = monhoc.mamonhoc";
@@ -154,8 +149,7 @@ class KetQuaModel extends DB{
     }
 
     // Lấy điểm để thống kê 
-    public function getStatictical($made, $manhom)
-    {
+    public function getStatictical($made, $manhom) {
         $nhomm = $manhom != 0 ? "AND chitietnhom.manhom = $manhom" : "";
         $sql = "SELECT chitietnhom.manguoidung, ketqua.manguoidung AS mandkq, makq, ketqua.made, diemthi
         FROM chitietnhom
@@ -250,7 +244,7 @@ class KetQuaModel extends DB{
             }
         }
         if ($input) {
-            $query = "SELECT * FROM ($query) AS combined_results WHERE (hoten LIKE N'%${input}%' OR manguoidung LIKE '%${input}%')";
+            $query = "SELECT * FROM ($query) AS combined_results WHERE (hoten LIKE N'%$input%' OR manguoidung LIKE '%$input%')";
         }
         $query .= " $order_by";
         return $query;
@@ -282,7 +276,7 @@ class KetQuaModel extends DB{
             }
         }
         if ($input) {
-            $query .= " AND (hoten LIKE N'%${input}%' OR CTN.manguoidung LIKE '%${input}%')";
+            $query .= " AND (hoten LIKE N'%$input%' OR CTN.manguoidung LIKE '%$input%')";
         }
         if (isset($args["custom"]["function"])) {
             $function = $args["custom"]["function"];

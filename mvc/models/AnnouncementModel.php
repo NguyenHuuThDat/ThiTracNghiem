@@ -1,9 +1,6 @@
 <?php
-class AnnouncementModel extends DB 
-{
-    
-    public function create($mamonhoc,$thoigiantao,$nguoitao,$nhom,$content)
-    {
+class AnnouncementModel extends DB {
+    public function create($mamonhoc,$thoigiantao,$nguoitao,$nhom,$content) {
         $sql = "INSERT INTO `thongbao`(`noidung`,`thoigiantao`,`nguoitao`) VALUES ('$content','$thoigiantao','$nguoitao')";
         $result = mysqli_query($this->con, $sql);
         if($result) {
@@ -20,8 +17,7 @@ class AnnouncementModel extends DB
         return mysqli_fetch_assoc($result);
     }
 
-    public function sendAnnouncement($matb,$nhom)
-    {
+    public function sendAnnouncement($matb,$nhom) {
         $valid = true;
         foreach ($nhom as $manhom) {
             $sql = "INSERT INTO `chitietthongbao`(`matb`, `manhom`) VALUES ('$matb','$manhom')";
@@ -44,8 +40,7 @@ class AnnouncementModel extends DB
         return $rows;
     }
 
-    public function getAll($user_id) 
-    {
+    public function getAll($user_id)  {
         $sql = "SELECT `chitietthongbao`.`matb`,`tennhom`,`noidung`, `tenmonhoc` ,`namhoc`, `hocky`, `thoigiantao`
         FROM `thongbao`, `chitietthongbao`,`nhom`,`monhoc` 
         WHERE `thongbao`.`matb` = `chitietthongbao`.`matb` AND `chitietthongbao`.`manhom` = `nhom`.`manhom` AND `nhom`.`mamonhoc` = `monhoc`.`mamonhoc`
@@ -73,8 +68,7 @@ class AnnouncementModel extends DB
         return $rows;
     }
 
-    public function deleteAnnounce($matb)
-    {  
+    public function deleteAnnounce($matb) {  
         $result = $this->deleteDetailAnnounce($matb);
         if ($result) {
             $sql = "DELETE FROM `thongbao` WHERE `matb` = $matb";
@@ -85,8 +79,7 @@ class AnnouncementModel extends DB
 
 
     // Xóa thông báo trong bảng thongbao
-    public function deleteDetailAnnounce($matb)
-    {
+    public function deleteDetailAnnounce($matb) {
         $valid = true;
         $sql = "DELETE FROM `chitietthongbao` WHERE `matb` = $matb";
         $result = mysqli_query($this->con,$sql);
@@ -94,8 +87,7 @@ class AnnouncementModel extends DB
         return $valid; 
     }
 
-    public function getDetail($matb)
-    {
+    public function getDetail($matb) {
         $sql_announce = "SELECT `thongbao`.`matb`,`noidung`, `tenmonhoc` ,`namhoc`, `hocky` 
         FROM `thongbao`, `chitietthongbao`,`nhom`,`monhoc` 
         WHERE `thongbao`.`matb` = `chitietthongbao`.`matb` AND `chitietthongbao`.`manhom` = `nhom`.`manhom` AND `nhom`.`mamonhoc` = `monhoc`.`mamonhoc`
@@ -113,8 +105,7 @@ class AnnouncementModel extends DB
         return $thongbao;
     }
 
-    public function updateAnnounce($matb,$noidung,$nhom)
-    {
+    public function updateAnnounce($matb,$noidung,$nhom) {
         $valid = true;
         $sql = "UPDATE `thongbao` SET `noidung`='$noidung' WHERE `matb` = $matb" ;
         $result = mysqli_query($this->con, $sql);
@@ -125,8 +116,7 @@ class AnnouncementModel extends DB
         return $valid; 
     }
 
-    public function getNotifications($id)
-    {
+    public function getNotifications($id) {
         $sql = "SELECT `tennhom`,`avatar`,`hoten`,`noidung`, `thoigiantao` ,`chitietnhom`.`manhom` , monhoc.mamonhoc, monhoc.tenmonhoc
         FROM `thongbao`,`chitietthongbao`,`chitietnhom`, `nguoidung`,`nhom` ,`monhoc`
         WHERE `thongbao`.`matb` = `chitietthongbao`.`matb` AND `chitietthongbao`.`manhom` = `chitietnhom`.`manhom` 
@@ -146,7 +136,7 @@ class AnnouncementModel extends DB
     public function getQuery($filter, $input, $args) {
         $query = "SELECT TB.*, tenmonhoc, namhoc, hocky, GROUP_CONCAT(N.tennhom SEPARATOR ', ') AS nhom FROM thongbao TB, chitietthongbao CTTB, nhom N, monhoc MH WHERE TB.matb = CTTB.matb AND CTTB.manhom = N.manhom AND N.mamonhoc = MH.mamonhoc AND TB.nguoitao = ".$args['id'];
         if ($input) {
-            $query .= " AND noidung LIKE N'%${input}%'";
+            $query .= " AND noidung LIKE N'%$input%'";
         }
         $query .= " GROUP BY TB.matb ORDER BY thoigiantao DESC";
         return $query;

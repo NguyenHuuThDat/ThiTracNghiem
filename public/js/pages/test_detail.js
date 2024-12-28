@@ -5,42 +5,41 @@ function showData(data) {
     var hours = Math.floor(totalSeconds / 3600);
     var minutes = Math.floor((totalSeconds % 3600) / 60);
     var seconds = Math.floor(totalSeconds % 60);
-    var formattedTime =
-      hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0");
+    var formattedTime = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0");
     html += `<tr>
-        <td class="text-center">${Element["manguoidung"]}</td>
+                <td class="text-center">${Element["manguoidung"]}</td>
 
-        <td class="fs-sm d-flex align-items-center">
-            <img class="img-avatar img-avatar48 me-3" src="./public/media/avatars/${Element["avatar"] == null ? "avatar2.jpg" : Element["avatar"]}" alt="${Element["hoten"]}">
-            <div class="d-flex flex-column">
-                <strong class="text-primary">${Element["hoten"]}</strong>
-                <span class="fw-normal fs-sm text-muted">${Element["email"]}</span>
-            </div>
-        </td>
+                <td class="fs-sm d-flex align-items-center">
+                    <img class="img-avatar img-avatar48 me-3" src="./public/media/avatars/${Element["avatar"] == null ? "avatar2.jpg" : Element["avatar"]}" alt="${Element["hoten"]}">
+                    
+                    <div class="d-flex flex-column">
+                        <strong class="text-primary">${Element["hoten"]}</strong>
+                        <span class="fw-normal fs-sm text-muted">${Element["email"]}</span>
+                    </div>
+                </td>
 
-        <td class="text-center">${Element["diemthi"] || "(Chưa nộp bài)"}</td>
-        
-        <td class="text-center">${Element["thoigianvaothi"] || "(Vắng thi)"}</td>
-        
-        <td class="text-center">${formattedTime}</td>
-        
-        <td class="text-center">${Element["solanchuyentab"] || 0}</td>
-        
-        <td class="text-center">
-            <a class="btn btn-sm btn-alt-secondary show-exam-detail" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Xem chi tiết" data-bs-original-title="Xem chi tiết" data-id="${Element["makq"] || ""}">
-                <i class="fa fa-fw fa-eye"></i>
-            </a>
-        </td>
-    </tr>`;
+                <td class="text-center">${Element["diemthi"] || "(Chưa nộp bài)"}</td>
+
+                <td class="text-center">${Element["thoigianvaothi"] || "(Vắng thi)"}</td>
+
+                <td class="text-center">${formattedTime}</td>
+                
+                <td class="text-center">${Element["solanchuyentab"] || 0}</td>
+                
+                <td class="text-center">
+                    <a class="btn btn-sm btn-alt-secondary show-exam-detail" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Xem chi tiết" data-bs-original-title="Xem chi tiết" data-id="${Element["makq"] || ""}">
+                        <i class="fa fa-fw fa-eye"></i>
+                    </a>
+
+                    <a class="btn btn-sm btn-alt-secondary print-pdf" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="In bài làm" data-bs-original-title="In bài làm" data-id="${Element["makq"] || ""}">
+                        <i class="fa fa-fw fa-print"></i>
+                    </a>
+                </td>
+            </tr>`;
   });
   $("#took_the_exam").html(html);
   $('[data-bs-toggle="tooltip"]').tooltip();
 }
-
-            // download file pdf bài làm của thí sinh
-            // <a class="btn btn-sm btn-alt-secondary print-pdf" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="In bài làm" data-bs-original-title="In bài làm" data-id="${Element["makq"] || ""}">
-            //     <i class="fa fa-fw fa-print"></i>
-            // </a>
 
 const made = document.getElementById("chitietdethi").dataset.id;
 
@@ -72,26 +71,19 @@ $(document).ready(function () {
   function showListQuestion(questions) {
     let html = ``;
     questions.forEach((question, index) => {
-      html += `<div class="question rounded border mb-3 bg-white" id="c${
-        index + 1
-      }">
+      html += `<div class="question rounded border mb-3 bg-white" id="c${index + 1}">
         <div class="question-top p-3">
-            <p class="question-content fw-bold mb-3">${index + 1}. ${
-        question.noidung
-      }</p>
+            <p class="question-content fw-bold mb-3">${index + 1}. ${question.noidung}</p>
             <div class="row">`;
       question.cautraloi.forEach((ctl, i) => {
         html += `<div class="col-6 mb-1">
-                <p class="mb-1"><b>${String.fromCharCode(i + 65)}.</b> ${
-          ctl.noidungtl
-        }</p>
+                <p class="mb-1"><b>${String.fromCharCode(i + 65)}.</b> ${ctl.noidungtl}</p>
             </div>`;
       });
       html += `</div></div></div>`;
     });
     $("#list-question").html(html);
   }
-
 
   var made = $("#chitietdethi").data("id");
 
@@ -130,15 +122,11 @@ $(document).ready(function () {
       let dadung = item.cautraloi.find((op) => op.ladapan == 1);
       data += `<div class="question rounded border mb-3">
             <div class="question-top p-3">
-                <p class="question-content fw-bold mb-3">${index + 1}. ${
-        item.noidung
-      } </p>
+                <p class="question-content fw-bold mb-3">${index + 1}. ${item.noidung} </p>
                 <div class="row">`;
       item.cautraloi.forEach((op, i) => {
         data += `<div class="col-6 mb-1">
-                <p class="mb-1"><b>${String.fromCharCode(i + 65)}.</b> ${
-          op.noidungtl
-        }</p></div>`;
+                <p class="mb-1"><b>${String.fromCharCode(i + 65)}.</b> ${op.noidungtl}</p></div>`;
       });
       data += `</div></div>`;
       data += `<div class="test-ans bg-primary rounded-bottom py-2 px-3 d-flex align-items-center"><p class="mb-0 text-white me-4">Đáp án của bạn:</p>`;
@@ -149,16 +137,12 @@ $(document).ready(function () {
               ? "btn-answer-true"
               : "btn-answer-false"
             : "";
-        data += `<button class="btn btn-light rounded-pill me-2 btn-answer-question ${check}" for="option-c${index}_${i}">${String.fromCharCode(
-          i + 65
-        )}</button>`;
+        data += `<button class="btn btn-light rounded-pill me-2 btn-answer-question ${check}" for="option-c${index}_${i}">${String.fromCharCode(i + 65)}</button>`;
       });
       data +=
         dadung.macautl == item.dapanchon
           ? `<span class="h2 mb-0 ms-1"><i class="fa fa-check" style="color:#76BB68;"></i></span>`
-          : `<span class="h2 mb-0 ms-1"><i class="fa fa-xmark" style="color:#FF5A5F;"></i></span><span class="mx-2 text-white">Đáp án đúng: ${String.fromCharCode(
-              item.cautraloi.indexOf(dadung) + 65
-            )}</span>`;
+          : `<span class="h2 mb-0 ms-1"><i class="fa fa-xmark" style="color:#FF5A5F;"></i></span><span class="mx-2 text-white">Đáp án đúng: ${String.fromCharCode(item.cautraloi.indexOf(dadung) + 65)}</span>`;
       data += `</div></div>`;
     });
     $("#content-file").html(data);
@@ -468,7 +452,6 @@ function showChart(data) {
     options: options,
   });
 }
-
 // Pagination
 const mainPagePagination = new Pagination();
 mainPagePagination.option.controller = "test";

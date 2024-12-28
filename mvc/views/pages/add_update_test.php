@@ -26,15 +26,10 @@
                     <label class="form-check-label" for="xemdiem">Xem điểm sau khi thi xong</label>
                 </div>
 
-                <!-- <div class="form-check form-switch mb-2 d-none">
+                <div class="form-check form-switch mb-2 d-none"> <!-- Bỏ thuộc tính d-none để hiển thị option -->
                     <input class="form-check-input" type="checkbox" id="xemda" name="xemda">
                     <label class="form-check-label" for="xemda">Xem đáp án khi thi xong</label>
-                </div> -->
-
-                <!-- <div class="form-check form-switch mb-2">
-                    <input class="form-check-input" type="checkbox" id="xemda" name="xemda">
-                    <label class="form-check-label" for="xemda">Xem đáp án khi thi xong</label>
-                </div> -->
+                </div>
 
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input" type="checkbox" id="xembailam" name="xembailam">

@@ -38,6 +38,7 @@
                     </tbody>
                 </table>
             </div>
+            
             <?php if(isset($data["Plugin"]["pagination"])) require "./mvc/views/inc/pagination.php"?>
         </div>
     </div>
@@ -98,8 +99,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-chapter" tabindex="-1" role="dialog" aria-labelledby="modal-chapter"
-    aria-hidden="true">
+<div class="modal fade" id="modal-chapter" tabindex="-1" role="dialog" aria-labelledby="modal-chapter" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -118,7 +118,9 @@
                             </tr>
                         </thead>
 
-                        <tbody id="showChapper"></tbody>
+                        <tbody id="showChapper">
+                            
+                        </tbody>
                     </table>
                 </div>
                 <div class="block block-rounded mb-3">

@@ -426,7 +426,7 @@ class DeThiModel extends DB {
                     }
                     if ($input) {
                         $input_entity_encode = htmlentities($input);
-                        $query .= " AND (noidung LIKE N'%${input}%' OR fnStripTags(noidung) LIKE N'%${input_entity_encode}%')";
+                        $query .= " AND (noidung LIKE N'%$input%' OR fnStripTags(noidung) LIKE N'%$input_entity_encode%')";
                     }
                     break;
                 default:

@@ -15,7 +15,9 @@
                         <button type="button" class="btn-block-option" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSetting" aria-controls="offcanvasSetting">
                             <i class="si si-info"></i>
                         </button>
+
                         <a data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa đề thi" class="btn-block-option" href="./test/update/<?php echo $data["Test"]["made"] ?>" role="button"><i class="si si-pencil"></i></a>
+                        
                         <button data-bs-toggle="tooltip" data-bs-placement="top" title="Toàn màn hình" type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
                     </div>
                 </li>
@@ -259,6 +261,7 @@
                 Thông tin đề thi
             </button>
         </div> -->
+        
         <div>
             <h5 class="mb-3">THÔNG TIN ĐỀ THI</h5>
             <ul class="list-unstyled text-dark fs-sm">

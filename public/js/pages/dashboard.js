@@ -49,7 +49,7 @@ function updateEmail(email){
         },
         success: function (response) {
             if(response){
-                Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-times me-1', message: `Cập nhật email thành công bạn có thể đăng nhập bằng tài khoản google` });
+                Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: `Cập nhật email thành công! Bạn có thể đăng nhập bằng tài khoản google` });
                 $("#modal-onboarding").modal("hide");
             } else {
                 Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: `Cập nhật email không thành công` });
@@ -61,7 +61,7 @@ function updateEmail(email){
 $("#btn-email").click(function(){
     let email = $("#email").val();
     if(email == ""){
-        Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: `Vui lòng không để trống email!` });
+        Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: `Vui lòng không để trống email` });
     }
     else if(validateEmail(email)){
        checkEmailExist(email)

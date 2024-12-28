@@ -11,6 +11,7 @@
         <div class="block-content">
             <div class="row justify-content-center">
                 <div class="col-md-11">
+                    <!-- Thanh tìm kiếm -->
                     <!-- <form action="be_pages_ecom_orders.html" method="POST" onsubmit="return false;">
                         <div class="mb-4">
                             <div class="input-group">
@@ -73,15 +74,19 @@
                             <tr>
                             <tr>
                                 <td>Người dùng</td>
+                                
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="nguoidung" value="view">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="nguoidung" value="create">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="nguoidung" value="update">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="nguoidung" value="delete">
                                 </td>
@@ -89,15 +94,19 @@
 
                             <tr>
                                 <td>Học phần</td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="hocphan" value="view">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="hocphan" value="create">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="hocphan" value="update">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="hocphan" value="delete">
                                 </td>
@@ -105,15 +114,19 @@
 
                             <tr>
                                 <td>Câu hỏi</td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="cauhoi" value="view">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="cauhoi" value="create">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="cauhoi" value="update">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="cauhoi" value="delete">
                                 </td>
@@ -121,15 +134,19 @@
 
                             <tr>
                                 <td>Môn học</td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="monhoc" value="view">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="monhoc" value="create">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="monhoc" value="update">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="monhoc" value="delete">
                                 </td>
@@ -137,15 +154,19 @@
 
                             <tr>
                                 <td>Chương</td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="chuong" value="view">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="chuong" value="create">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="chuong" value="update">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="chuong" value="delete">
                                 </td>
@@ -153,15 +174,19 @@
 
                             <tr>
                                 <td>Phân công</td>
+                                
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="phancong" value="view">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="phancong" value="create">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="phancong" value="update">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="phancong" value="delete">
                                 </td>
@@ -169,15 +194,19 @@
 
                             <tr>
                                 <td>Đề thi</td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="dethi" value="view">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="dethi" value="create">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="dethi" value="update">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="dethi" value="delete">
                                 </td>
@@ -185,15 +214,19 @@
 
                             <tr>
                                 <td>Nhóm quyền</td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="nhomquyen" value="view">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="nhomquyen" value="create">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="nhomquyen" value="update">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="nhomquyen" value="delete">
                                 </td>
@@ -201,15 +234,19 @@
 
                             <tr>
                                 <td>Thông báo</td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="thongbao" value="view">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="thongbao" value="create">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="thongbao" value="update">
                                 </td>
+
                                 <td class="text-center">
                                     <input class="form-check-input" type="checkbox" name="thongbao" value="delete">
                                 </td>
@@ -231,14 +268,12 @@
 
                     <div class="row justify-content-around">
                         <div class="col-6 form-check form-switch d-flex justify-content-center gap-2">
-                            <input class="form-check-input" type="checkbox" value="join" id="join_dethi"
-                                name="tgthi">
+                            <input class="form-check-input" type="checkbox" value="join" id="join_dethi" name="tgthi">
                             <label class="form-check-label" for="join_dethi">Tham gia thi</label>
                         </div>
 
                         <div class="col-6 form-check form-switch d-flex justify-content-center gap-2">
-                            <input class="form-check-input" type="checkbox" value="join" id="join_hocphan"
-                                name="tghocphan">
+                            <input class="form-check-input" type="checkbox" value="join" id="join_hocphan" name="tghocphan">
                             <label class="form-check-label" for="join_hocphan">Tham gia học phần</label>
                         </div>
                     </div>

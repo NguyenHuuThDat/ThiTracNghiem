@@ -3,8 +3,8 @@
         <div class="block-header block-header-default">
             <h3 class="block-title">Cài đặt trang web</h3>
             <div class="block-options">
-                <button type="button" class="btn btn-hero btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#modal-add-role"><i class="fa-regular fa-floppy-disk me-1"></i> Lưu cài đặt</button>
+                <button type="button" class="btn btn-hero btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add-role">
+                    <i class="fa-regular fa-floppy-disk me-1"></i> Lưu cài đặt</button>
             </div>
         </div>
 

@@ -84,9 +84,13 @@ function showSubject(data) {
                     </td>
                     
                     <td class="text-center">${element['mamonhoc']}</td>
+
                     <td>${element['tenmonhoc']}</td>
+
                     <td class="text-center">${element['sotinchi']}</td>
+
                     <td class="text-center">${element['sotietlythuyet']}</td>
+
                     <td class="text-center">${element['sotietthuchanh']}</td>
                 </tr>`
     });

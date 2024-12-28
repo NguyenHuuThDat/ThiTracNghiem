@@ -303,12 +303,12 @@ $(document).ready(function () {
 
         swalWithBootstrapButtons
         .fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: "Bạn chắc chắn thoát?",
+            text: "Bạn sẽ không thể hoàn tác việc này!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Yes, out groups section!",
-            cancelButtonText: "No, cancel!",
+            confirmButtonText: "Thoát nhóm",
+            cancelButtonText: "Hủy",
         })
         .then((result) => {
             if (result.isConfirmed) {

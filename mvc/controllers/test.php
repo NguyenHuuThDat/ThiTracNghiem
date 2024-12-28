@@ -401,6 +401,7 @@ class Test extends Controller {
         $cauHoi = $this->dethimodel->getResultDetail($makq);
         $diem = $info['diemthi'] != "" ? $info['diemthi'] : 0;
         $socaudung = $info['socaudung'] != "" ? $info['socaudung'] : 0;
+        
         $html = '
         <!DOCTYPE html>
         <html>
@@ -412,17 +413,17 @@ class Test extends Controller {
                     margin: 0;
                     box-sizing: border-box;
                 }
-                
+
                 body {
-                    font-family: "Times New Roman", serif; 
+                    font-family: DejaVu Sans, "Times New Roman", serif; 
                     padding: 50px 50px;
                 }
             </style>
         </head>
         <body>
-            <table style="width:100%">
+            <table style="width: 100%">
                 <tr>
-                    <td style="text-align: center;font-weight:bold">
+                    <td style="text-align: center; font-weight: bold;">
                         TRƯỜNG ĐẠI HỌC KIẾN TRÚC HÀ NỘI<br>
                         KHOA CÔNG NGHỆ THÔNG TIN<br><br><br>
                     </td>
@@ -436,13 +437,13 @@ class Test extends Controller {
                 </tr>
             </table>
 
-            <table style="width:100%;margin-bottom:10px">
-                <tr style="width:100%">
+            <table style="width: 100%; margin-bottom: 10px">
+                <tr style="width: 100%">
                     <td>Mã sinh viên: ' . $info['manguoidung'] . '</td>
                     <td>Tên thí sinh: ' . $info['hoten'] . '</td>
                 </tr>
 
-                <tr style="width:100%">
+                <tr style="width: 100%">
                     <td>Số câu đúng: ' . $socaudung . '/' . $info['tongsocauhoi'] . '</td>
                     <td>Điểm: ' . $diem . '</td>
                 </tr>
@@ -451,7 +452,7 @@ class Test extends Controller {
             <div style="margin-top:20px">
         ';
         foreach ($cauHoi as $index => $ch) {
-            $html .= '<li style="list-style:none"><strong>Câu ' . ($index + 1) . '</strong>: ' . $ch['noidung'] . '<ol type="A" style="margin-left:30px">';
+            $html .= '<li style="list-style:none"><strong>Câu ' . ($index + 1) . '</strong>: ' . $ch['noidung'] . '<ol type="A" style="margin-left: 30px">';
             foreach ($ch['cautraloi'] as $ctl) {
                 $dapAn = $ctl['ladapan'] == "1" ? " (Đáp án chính xác)" : "";
                 $dapAnChon = $ctl['macautl'] == $ch['dapanchon'] ? " (Đáp án chọn)" : "";
@@ -466,9 +467,12 @@ class Test extends Controller {
         </body>
         </html>
         ';
-
         $dompdf->loadHtml($html, 'UTF-8');
+
+        // Thiết lập kích thước giấy và hướng giấy
         $dompdf->setPaper('A4', 'portrait');
+
+        // Xuất PDF
         $dompdf->render();
         $output = $dompdf->output();
         echo base64_encode($output);

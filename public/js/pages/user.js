@@ -82,9 +82,13 @@ const showData = function (users) {
                 </td>
                           
                 <td class="text-center">${user.gioitinh == 1 ? "Nam" : "Nữ"}</td>
+
                 <td class="text-center">${user.ngaysinh}</td>
+
                 <td class="text-center">${user.tennhomquyen}</td>
+
                 <td class="text-center">${user.ngaythamgia}</td>
+
                 <td class="text-center">
                   <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill ${user.trangthai == 1 ? "bg-success-light text-success" : "bg-danger-light text-danger"} bg-success-light text-success">
                     ${user.trangthai == 1 ? "Hoạt động" : "Khoá"}
@@ -165,7 +169,7 @@ $(document).ready(function () {
       dataType: "json",
       success: function (response) {
         if (response.length  != 1) {
-          Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: `Người dùng đã tồn tại!` });
+          Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: `Hãy điền đầy đủ thông tin!` });
           result = false;
         }
       }
@@ -302,7 +306,7 @@ $(document).ready(function () {
           },
         });
       } else {
-        e.fire("Cancelled", "Bạn đã không xóa người dùng :)", "error");
+        e.fire("Cancelled", "Bạn đã không xóa người dùng", "error");
       }
     });
   });

@@ -115,7 +115,7 @@ $(document).ready(function () {
         let index = $(this).data("index");
         e.fire({
             title: "Are you sure?",
-            text: "Bạn có chắc chắn muốn xoá đề thi?",
+            text: "Bạn có chắc chắn muốn xoá?",
             icon: "warning",
             showCancelButton: !0,
             customClass: {

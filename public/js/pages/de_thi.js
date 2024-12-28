@@ -152,7 +152,7 @@ $(document).ready(function () {
   $("#btn-thoat").click(function (e) {
     e.preventDefault();
     Swal.fire({
-      title: "Bạn có chắc chắn muốn thoát ?",
+      title: "Bạn có chắc chắn muốn thoát?",
       html: "<p class='text-muted fs-6 text-start mb-0'>Khi xác nhận thoát, bạn sẽ không được tiếp tục làm bài ở lần thi này. Kết quả bài làm vẫn sẽ được nộp</p>",
       icon: "warning",
       showCancelButton: true,

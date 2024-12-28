@@ -91,7 +91,7 @@ class CauHoiModel extends DB {
 
     public function getQueryWithInput($filter, $input, $args) {
         $input_entity_encode = htmlentities($input);
-        $query = "SELECT *, fnStripTags(noidung) FROM cauhoi JOIN monhoc on cauhoi.mamonhoc = monhoc.mamonhoc WHERE (noidung LIKE N'%${input}%' OR fnStripTags(noidung) LIKE N'%${input_entity_encode}%') AND cauhoi.trangthai='1'";
+        $query = "SELECT *, fnStripTags(noidung) FROM cauhoi JOIN monhoc on cauhoi.mamonhoc = monhoc.mamonhoc WHERE (noidung LIKE N'%$input%' OR fnStripTags(noidung) LIKE N'%$input_entity_encode%') AND cauhoi.trangthai='1'";
         if (isset($filter)) {
             if (isset($filter['mamonhoc'])) {
                 $query .= " AND monhoc.mamonhoc = ".$filter['mamonhoc'];

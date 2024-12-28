@@ -8,7 +8,7 @@ Dashmix.onLoad(() =>
                 rules: {
                     mamonhoc: {
                         required: !0,
-                        // digits: true,
+                        digits: true,
                     },
 
                     tenmonhoc: {
@@ -31,7 +31,7 @@ Dashmix.onLoad(() =>
                 messages: {
                     mamonhoc: {
                         required: "Vui lòng nhập mã môn học",
-                        // digits: "Mã môn học phải là các ký tự số và chữ",
+                        digits: "Mã môn học phải là các ký tự số",
                     },
                     tenmonhoc: {
                         required: "Vui lòng cung cấp tên môn học",
@@ -58,25 +58,30 @@ function showData(subjects) {
     let html = "";
     subjects.forEach((subject) => {
         html += `<tr tid="${subject.mamonhoc}">
-                <td class="text-center fs-sm"><strong>${subject.mamonhoc}</strong></td>
-                <td>${subject.tenmonhoc}</td>
-                <td class="d-none d-sm-table-cell text-center fs-sm">${subject.sotinchi}</td>
-                <td class="d-none d-sm-table-cell text-center fs-sm">${subject.sotietlythuyet}</td>
-                <td class="d-none d-sm-table-cell text-center fs-sm">${subject.sotietthuchanh}</td>
-                <td class="text-center col-action">
-                    <a data-role="chuong" data-action="view" class="btn btn-sm btn-alt-secondary subject-info" data-bs-toggle="modal" data-bs-target="#modal-chapter" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Thêm chương" data-bs-original-title="Chi tiết chương" data-id="${subject.mamonhoc}">
-                        <i class="fa fa-circle-info"></i>
-                    </a>
+                    <td class="text-center fs-sm"><strong>${subject.mamonhoc}</strong></td>
 
-                    <a data-role="monhoc" data-action="update" class="btn btn-sm btn-alt-secondary btn-edit-subject" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Sửa môn học" data-bs-original-title="Sửa môn học" data-id="${subject.mamonhoc}">
-                        <i class="fa fa-fw fa-pencil"></i>
-                    </a>
-                  
-                    <a data-role="monhoc" data-action="delete" class="btn btn-sm btn-alt-secondary btn-delete-subject" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Xoá môn học" data-bs-original-title="Xoá môn học" data-id="${subject.mamonhoc}">
-                        <i class="fa fa-fw fa-times"></i>
-                    </a>
-                </td>
-            </tr>`;
+                    <td>${subject.tenmonhoc}</td>
+
+                    <td class="d-none d-sm-table-cell text-center fs-sm">${subject.sotinchi}</td>
+
+                    <td class="d-none d-sm-table-cell text-center fs-sm">${subject.sotietlythuyet}</td>
+
+                    <td class="d-none d-sm-table-cell text-center fs-sm">${subject.sotietthuchanh}</td>
+
+                    <td class="text-center col-action">
+                        <a data-role="chuong" data-action="view" class="btn btn-sm btn-alt-secondary subject-info" data-bs-toggle="modal" data-bs-target="#modal-chapter" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Thêm chương" data-bs-original-title="Chi tiết chương" data-id="${subject.mamonhoc}">
+                            <i class="fa fa-circle-info"></i>
+                        </a>
+
+                        <a data-role="monhoc" data-action="update" class="btn btn-sm btn-alt-secondary btn-edit-subject" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Sửa môn học" data-bs-original-title="Sửa môn học" data-id="${subject.mamonhoc}">
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </a>
+                    
+                        <a data-role="monhoc" data-action="delete" class="btn btn-sm btn-alt-secondary btn-delete-subject" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Xoá môn học" data-bs-original-title="Xoá môn học" data-id="${subject.mamonhoc}">
+                            <i class="fa fa-fw fa-times"></i>
+                        </a>
+                    </td>
+                </tr>`;
     });
     $("#list-subject").html(html);
     $('[data-bs-toggle="tooltip"]').tooltip();
@@ -89,8 +94,35 @@ $(document).ready(function () {
         $(".add-subject-element").show();
     });
 
-    function checkTonTai(mamon) {
+    // function checkTonTai(mamon) {
+    //     let check = true;
+    //     $.ajax({
+    //         type: "post",
+    //         url: "./subject/checkSubject",
+    //         data: {
+    //             mamon: mamon
+    //         },
+    //         async: false,
+    //         dataType: "json",
+    //         success: function (response) {
+    //             if (response.length !== 0) {
+    //                 Dashmix.helpers("jq-notify", {
+    //                     type: "danger",
+    //                     icon: "fa fa-times me-1",
+    //                     message: `Môn học đã tồn tại!`,
+    //                 });
+    //                 check = false;
+    //             }
+    //         },
+    //     });
+    //     return check;
+    // }
+
+    function checkTonTai(mamon, isUpdate = false) {
         let check = true;
+         if (isUpdate) {
+               return check; // Nếu đang update, bỏ qua kiểm tra
+           }
         $.ajax({
             type: "post",
             url: "./subject/checkSubject",
@@ -112,6 +144,43 @@ $(document).ready(function () {
         });
         return check;
     }
+
+    // $("#add_subject").on("click", function () {
+    //     let mamon = $("#mamonhoc").val();
+    //     if ($(".form-add-subject").valid() && checkTonTai(mamon)) {
+    //         $.ajax({
+    //             type: "post",
+    //             url: "./subject/add",
+    //             data: {
+    //                 mamon: mamon,
+    //                 tenmon: $("#tenmonhoc").val(),
+    //                 sotinchi: $("#sotinchi").val(),
+    //                 sotietlythuyet: $("#sotiet_lt").val(),
+    //                 sotietthuchanh: $("#sotiet_th").val(),
+    //             },
+    //             success: function (response) {
+    //                 if (response) {
+    //                     Dashmix.helpers("jq-notify", {
+    //                         type: "success",
+    //                         icon: "fa fa-check me-1",
+    //                         message: "Thêm môn học thành công!",
+    //                     });
+    //                     $("#modal-add-subject").modal("hide");
+    //                     mainPagePagination.getPagination(
+    //                         mainPagePagination.option,
+    //                         mainPagePagination.valuePage.curPage
+    //                     );
+    //                 } else {
+    //                     Dashmix.helpers("jq-notify", {
+    //                         type: "danger",
+    //                         icon: "fa fa-times me-1",
+    //                         message: "Thêm môn học không thành công!",
+    //                     });
+    //                 }
+    //             },
+    //         });
+    //     }
+    // });
 
     $("#add_subject").on("click", function () {
         let mamon = $("#mamonhoc").val();
@@ -185,42 +254,81 @@ $(document).ready(function () {
         $("#update_subject").data("id", "");
     });
 
+    // $("#update_subject").click(function (e) {
+    //     e.preventDefault();
+    //     let mamon = $(this).data("id");
+    //     if ($(".form-add-subject").valid() && checkTonTai(mamon)) {
+    //         $.ajax({
+    //             type: "post",
+    //             url: "./subject/update",
+    //             data: {
+    //                 id: mamon,
+    //                 mamon: $("#mamonhoc").val(),
+    //                 tenmon: $("#tenmonhoc").val(),
+    //                 sotinchi: $("#sotinchi").val(),
+    //                 sotietlythuyet: $("#sotiet_lt").val(),
+    //                 sotietthuchanh: $("#sotiet_th").val(),
+    //             },
+    //             success: function (response) {
+    //                 if (response) {
+    //                     $("#modal-add-subject").modal("hide");
+    //                     Dashmix.helpers("jq-notify", {
+    //                         type: "success",
+    //                         icon: "fa fa-check me-1",
+    //                         message: "Cập nhật môn học thành công!",
+    //                     });
+    //                     mainPagePagination.getPagination(
+    //                         mainPagePagination.option,
+    //                         mainPagePagination.valuePage.curPage
+    //                     );
+    //                 } else {
+    //                     Dashmix.helpers("jq-notify", {
+    //                         type: "danger",
+    //                         icon: "fa fa-times me-1",
+    //                         message: "Cập nhật môn học không thành công!",
+    //                     });
+    //                 }
+    //             },
+    //         });
+    //     }
+    // });
+
     $("#update_subject").click(function (e) {
         e.preventDefault();
         let mamon = $(this).data("id");
-        if ($(".form-add-subject").valid() && checkTonTai(mamon)) {
-            $.ajax({
-                type: "post",
-                url: "./subject/update",
-                data: {
-                    id: mamon,
-                    mamon: $("#mamonhoc").val(),
-                    tenmon: $("#tenmonhoc").val(),
-                    sotinchi: $("#sotinchi").val(),
-                    sotietlythuyet: $("#sotiet_lt").val(),
-                    sotietthuchanh: $("#sotiet_th").val(),
-                },
-                success: function (response) {
-                    if (response) {
-                        $("#modal-add-subject").modal("hide");
-                        Dashmix.helpers("jq-notify", {
-                            type: "success",
-                            icon: "fa fa-check me-1",
-                            message: "Cập nhật môn học thành công!",
-                        });
-                        mainPagePagination.getPagination(
-                            mainPagePagination.option,
-                            mainPagePagination.valuePage.curPage
-                        );
-                    } else {
-                        Dashmix.helpers("jq-notify", {
-                            type: "danger",
-                            icon: "fa fa-times me-1",
-                            message: "Cập nhật môn học không thành công!",
-                        });
-                    }
-                },
-            });
+         if ($(".form-add-subject").valid() && checkTonTai($("#mamonhoc").val(), true)) {
+                $.ajax({
+                    type: "post",
+                    url: "./subject/update",
+                    data: {
+                        id: mamon,
+                        mamon: $("#mamonhoc").val(),
+                        tenmon: $("#tenmonhoc").val(),
+                        sotinchi: $("#sotinchi").val(),
+                        sotietlythuyet: $("#sotiet_lt").val(),
+                        sotietthuchanh: $("#sotiet_th").val(),
+                    },
+                    success: function (response) {
+                        if (response) {
+                            $("#modal-add-subject").modal("hide");
+                            Dashmix.helpers("jq-notify", {
+                                type: "success",
+                                icon: "fa fa-check me-1",
+                                message: "Cập nhật môn học thành công!",
+                            });
+                            mainPagePagination.getPagination(
+                                mainPagePagination.option,
+                                mainPagePagination.valuePage.curPage
+                            );
+                        } else {
+                            Dashmix.helpers("jq-notify", {
+                                type: "danger",
+                                icon: "fa fa-times me-1",
+                                message: "Cập nhật môn học không thành công!",
+                            });
+                        }
+                    },
+                });
         }
     });
 
@@ -263,13 +371,13 @@ $(document).ready(function () {
                     },
                     success: function (response) {
                         if (response) {
-                            e.fire("Deleted!", "Xóa môn học thành công!", "success");
+                            e.fire("Deleted!", "Xóa môn học thành công", "success");
                             mainPagePagination.getPagination(
                                 mainPagePagination.option,
                                 mainPagePagination.valuePage.curPage
                             );
                         } else {
-                            e.fire("Lỗi !", "Xoá môn học không thành công !)", "error");
+                            e.fire("Lỗi !", "Xoá môn học không thành công", "error");
                         }
                     },
                 });
@@ -387,14 +495,14 @@ $(document).ready(function () {
                     Dashmix.helpers("jq-notify", {
                         type: "success",
                         icon: "fa fa-check me-1",
-                        message: "Xoá chương thành công!",
+                        message: "Xoá chương thành công",
                     });
                     showChapter($("#mamon_chuong").val());
                 } else {
                     Dashmix.helpers("jq-notify", {
                         type: "danger",
                         icon: "fa fa-times me-1",
-                        message: "Xoá chương không thành công!",
+                        message: "Xoá chương không thành công",
                     });
                 }
             },
@@ -427,13 +535,13 @@ $(document).ready(function () {
                     Dashmix.helpers("jq-notify", {
                         type: "success",
                         icon: "fa fa-check me-1",
-                        message: "Cập nhật chương thành công!",
+                        message: "Cập nhật chương thành công",
                     });
                 } else {
                     Dashmix.helpers("jq-notify", {
                         type: "danger",
                         icon: "fa fa-times me-1",
-                        message: "Cập nhật chương không thành công!",
+                        message: "Cập nhật chương không thành công",
                     });
                 }
             },

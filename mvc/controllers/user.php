@@ -2,15 +2,13 @@
 class User extends Controller{
     public $NguoiDungModel;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->NguoiDungModel = $this->model("NguoiDungModel");
         parent::__construct();
         require_once "./mvc/core/Pagination.php";
     }
 
-    public function default()
-    {
+    public function default() {
         if(AuthCore::checkPermission("nguoidung","view")) {
             $this->view("main_layout",[
                 "Page" => "user",
@@ -30,8 +28,7 @@ class User extends Controller{
         } else $this->view("single_layout", ["Page" => "error/page_403","Title" => "Lỗi !"]);
     }
 
-    public function add()
-    {
+    public function add() {
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $id = $_POST['masinhvien'];
             $email = $_POST['email'];
@@ -46,8 +43,7 @@ class User extends Controller{
         }
     }
 
-    public function checkUser() 
-    {
+    public function checkUser()  {
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $id = $_POST['mssv'];
             $email = $_POST['email'];
@@ -56,8 +52,7 @@ class User extends Controller{
         }
     }
 
-    public function getData()
-    {
+    public function getData() {
         $data = $this->NguoiDungModel->getAll();
         echo json_encode($data);
     }
@@ -84,16 +79,14 @@ class User extends Controller{
         }
     }
 
-    public function getDetail()
-    {
+    public function getDetail() {
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $result = $this->NguoiDungModel->getById($_POST['id']);
             echo json_encode($result);
         }
     }
 
-    public function addExcel()
-    {
+    public function addExcel() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             require_once 'vendor/autoload.php';
 
@@ -131,7 +124,7 @@ class User extends Controller{
                 $data[$i]['fullname'] = trim($fullname);
                 $data[$i]['email'] = trim($email);
                 $data[$i]['mssv'] = trim($mssv);
-                $data[$i]['nhomquyen'] = 3;
+                $data[$i]['nhomquyen'] = 11;
                 $data[$i]['trangthai'] = 1;
             }
             echo json_encode($data);
