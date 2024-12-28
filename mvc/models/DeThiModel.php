@@ -252,7 +252,6 @@ class DeThiModel extends DB {
         return $data['makq'];
     }
 
-
     public function getQuestionTestAuto($made) {
         $sql_dethi = "select * from dethi where made = '$made'";
         $data_dethi = mysqli_fetch_assoc(mysqli_query($this->con, $sql_dethi));

@@ -1,7 +1,6 @@
 <?php
-class ChiTietDeThiModel extends DB{
-    public function create($made, $macauhoi, $thutu)
-    {
+class ChiTietDeThiModel extends DB {
+    public function create($made, $macauhoi, $thutu) {
         $valid = true;
         $sql = "INSERT INTO `chitietdethi`(`made`, `macauhoi`, `thutu`) VALUES ('$made','$macauhoi','$thutu')";
         $result = mysqli_query($this->con, $sql);
@@ -9,8 +8,7 @@ class ChiTietDeThiModel extends DB{
         return $valid;
     }
 
-    public function createMultiple($made, $cauhoi)
-    {
+    public function createMultiple($made, $cauhoi) {
         $valid = true;
         $result = $this->delete($made);
         if($result) {
@@ -25,8 +23,7 @@ class ChiTietDeThiModel extends DB{
         return $valid;
     }
 
-    public function delete($made)
-    {
+    public function delete($made) {
         $valid = true;
         $sql = "DELETE FROM `chitietdethi` WHERE `made` = '$made'";
         $result = mysqli_query($this->con, $sql);

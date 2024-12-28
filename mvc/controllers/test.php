@@ -162,10 +162,7 @@ class Test extends Controller {
                     $this->view("single_layout", ["Page" => "error/page_403", "Title" => "Lỗi !"]);
                 }
             } else {
-                $this->view("single_layout", [
-                    "Page" => "error/page_404",
-                    "Title" => "Lỗi !"
-                ]);
+                $this->view("single_layout", ["Page" => "error/page_404", "Title" => "Lỗi !"]);
             }
         } else {
             $this->view("single_layout", ["Page" => "error/page_404", "Title" => "Lỗi !"]);
@@ -297,6 +294,7 @@ class Test extends Controller {
         }
     }
 
+    // Tạo đề thủ công
     public function getQuestionOfTestManual() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $made = $_POST['made'];
@@ -312,7 +310,6 @@ class Test extends Controller {
             echo json_encode($result);
         }
     }
-
 
     public function startTest() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -410,8 +407,16 @@ class Test extends Controller {
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
             <style>
-                * {padding: 0;margin: 0;box-sizing: border-box;}
-                body{font-family: "Times New Roman", serif; padding: 50px 50px}
+                * {
+                    padding: 0;
+                    margin: 0;
+                    box-sizing: border-box;
+                }
+                
+                body {
+                    font-family: "Times New Roman", serif; 
+                    padding: 50px 50px;
+                }
             </style>
         </head>
         <body>
@@ -421,6 +426,7 @@ class Test extends Controller {
                         TRƯỜNG ĐẠI HỌC KIẾN TRÚC HÀ NỘI<br>
                         KHOA CÔNG NGHỆ THÔNG TIN<br><br><br>
                     </td>
+
                     <td style="text-align: center;">
                         <p style="font-weight:bold">' . mb_strtoupper($info['tende'], "UTF-8") . '</p>
                         <p style="font-weight:bold">Học phần: ' . $info['tenmonhoc'] . '</p>
@@ -429,11 +435,13 @@ class Test extends Controller {
                     </td>
                 </tr>
             </table>
+
             <table style="width:100%;margin-bottom:10px">
                 <tr style="width:100%">
                     <td>Mã sinh viên: ' . $info['manguoidung'] . '</td>
                     <td>Tên thí sinh: ' . $info['hoten'] . '</td>
                 </tr>
+
                 <tr style="width:100%">
                     <td>Số câu đúng: ' . $socaudung . '/' . $info['tongsocauhoi'] . '</td>
                     <td>Điểm: ' . $diem . '</td>

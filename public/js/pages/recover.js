@@ -145,7 +145,7 @@ $("#btnChange").click(function (e) {
                 if (response == 1) {
                     Dashmix.helpers("jq-notify", {
                         type: "success",
-                        icon: "fa fa-times me-1",
+                        icon: "fa fa-check me-1",
                         message: `Thay đổi mật khẩu thành công!`,
                     });
             

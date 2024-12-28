@@ -6,41 +6,29 @@ function showData(data) {
     var minutes = Math.floor((totalSeconds % 3600) / 60);
     var seconds = Math.floor(totalSeconds % 60);
     var formattedTime =
-      hours.toString().padStart(2, "0") +
-      ":" +
-      minutes.toString().padStart(2, "0") +
-      ":" +
-      seconds.toString().padStart(2, "0");
+      hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0");
     html += `<tr>
         <td class="text-center">${Element["manguoidung"]}</td>
+
         <td class="fs-sm d-flex align-items-center">
-            <img class="img-avatar img-avatar48 me-3"
-                src="./public/media/avatars/${
-                  Element["avatar"] == null ? "avatar2.jpg" : Element["avatar"]
-                }" alt="${Element["hoten"]}">
+            <img class="img-avatar img-avatar48 me-3" src="./public/media/avatars/${Element["avatar"] == null ? "avatar2.jpg" : Element["avatar"]}" alt="${Element["hoten"]}">
             <div class="d-flex flex-column">
                 <strong class="text-primary">${Element["hoten"]}</strong>
-                <span class="fw-normal fs-sm text-muted">${
-                  Element["email"]
-                }</span>
+                <span class="fw-normal fs-sm text-muted">${Element["email"]}</span>
             </div>
         </td>
+
         <td class="text-center">${Element["diemthi"] || "(Chưa nộp bài)"}</td>
-        <td class="text-center">${
-          Element["thoigianvaothi"] || "(Vắng thi)"
-        }</td>
+        
+        <td class="text-center">${Element["thoigianvaothi"] || "(Vắng thi)"}</td>
+        
         <td class="text-center">${formattedTime}</td>
+        
         <td class="text-center">${Element["solanchuyentab"] || 0}</td>
+        
         <td class="text-center">
-            <a class="btn btn-sm btn-alt-secondary show-exam-detail" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Xem chi tiết" data-bs-original-title="Xem chi tiết" data-id="${
-              Element["makq"] || ""
-            }">
+            <a class="btn btn-sm btn-alt-secondary show-exam-detail" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="Xem chi tiết" data-bs-original-title="Xem chi tiết" data-id="${Element["makq"] || ""}">
                 <i class="fa fa-fw fa-eye"></i>
-            </a>
-            <a class="btn btn-sm btn-alt-secondary print-pdf" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="In bài làm" data-bs-original-title="In bài làm" data-id="${
-              Element["makq"] || ""
-            }">
-                <i class="fa fa-fw fa-print"></i>
             </a>
         </td>
     </tr>`;
@@ -48,6 +36,11 @@ function showData(data) {
   $("#took_the_exam").html(html);
   $('[data-bs-toggle="tooltip"]').tooltip();
 }
+
+            // download file pdf bài làm của thí sinh
+            // <a class="btn btn-sm btn-alt-secondary print-pdf" href="javascript:void(0)" data-bs-toggle="tooltip" aria-label="In bài làm" data-bs-original-title="In bài làm" data-id="${Element["makq"] || ""}">
+            //     <i class="fa fa-fw fa-print"></i>
+            // </a>
 
 const made = document.getElementById("chitietdethi").dataset.id;
 

@@ -27,6 +27,7 @@
                                     name="passwordNew" placeholder="Enter pasword new">
                             </div>
                         </div>
+
                         <div class="mb-4">
                             <label class="form-label" for="comfirm">Comfirm password</label>
                             <div class="input-group input-group-lg">
@@ -34,6 +35,7 @@
                                     name="comfirm" placeholder="Enter comfirm">
                             </div>
                         </div>
+                        
                         <div class="text-center mb-4 add-btn-otp">
                             <button id="btnChange" class="btn btn-hero btn-primary">
                                 Enter

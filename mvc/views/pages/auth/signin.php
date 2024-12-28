@@ -31,7 +31,7 @@
                                     <img alt="Logo" src="./public/media/svg/google-icon.svg" style="height:15px;margin-right:20px">Đăng nhập với Google
                                 </a>
 
-                                <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
+                                <!-- <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
                                     <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="./auth/recover">
                                         <i class="fa fa-exclamation-triangle opacity-50 me-1"></i> Quên mật khẩu
                                     </a>
@@ -39,7 +39,7 @@
                                     <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="./auth/signup">
                                         <i class="fa fa-plus opacity-50 me-1"></i> Đăng ký
                                     </a>
-                                </p>
+                                </p> -->
                             </div>
                         </form>
                     </div>
