@@ -1,7 +1,11 @@
 # Đồ án Phát triển Phần mềm Hướng dịch vụ
-### Hướng dẫn cài đặt
 
-Cấu hình thông tin database và đường dẫn trang chủ tại file config.php
+### Hướng dẫn cài đặt
+- Cài đặt XAMPP >= 8.0.25, Composer (mặc định là phiên bản mới nhất)
+- Tạo 1 database mới trên phpmyadmin có tên là " thitracnghiem ", sau đó nhập database vào
+- Cấu hình thông tin database và đường dẫn trang chủ tại file config.php
+- Cài đặt thư viện cần thiết: mở terminal nhập " composer install "
+- Thông tin chi tiết các chức năng vui lòng liên hệ trực tiếp
 
 ### Tài khoản Admin
 - Username: 3121410422
