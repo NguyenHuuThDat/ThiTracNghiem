@@ -2,10 +2,13 @@
 
 ### Hướng dẫn cài đặt
 - Cài đặt XAMPP >= 8.0.25, Composer (mặc định là phiên bản mới nhất)
-- Tạo 1 database mới trên phpmyadmin có tên là " thitracnghiem ", sau đó nhập database vào
+- Clone source code về thư mục htdocs của XAMPP
+- Chạy XAMPP, tạo 1 database mới có tên là " thitracnghiem ", sau đó import code sql của file database vào để tránh gặp lỗi
 - Cấu hình thông tin database và đường dẫn trang chủ tại file config.php
 - Cài đặt thư viện cần thiết: mở terminal nhập " composer install "
-- Thông tin chi tiết các chức năng vui lòng liên hệ trực tiếp
+- Nếu gặp lỗi trong quá trình cài thư viện composer, mở file php.ini trong /xampp/php/
+Tìm và mở khóa các dòng extension=gd, extension=zip (nếu có) bằng cách xóa dấu ;
+Lưu lại và chạy lại lệnh composer install
 
 ### Tài khoản Admin
 - Username: 3121410422
