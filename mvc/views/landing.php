@@ -296,6 +296,7 @@
                                     </a>
                                 </div>
 
+                                <!-- 
                                 <div class="p-3 invisible" data-toggle="appear" data-class="animated flipInX">
                                     <a class="block block-rounded bg-gd-primary text-center" href="https://github.com/hanhan1310">
                                         <div class="block-content block-content-full bg-gd-sea">
@@ -346,7 +347,8 @@
                                             <p class="fs-sm text-white-75 mb-0">2155010092</p>
                                         </div>
                                     </a>
-                                </div>
+                                </div> 
+                                -->
                             </div>
                         </div>
                     </div>
