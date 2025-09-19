@@ -268,7 +268,7 @@
                 </div>
             </div>
 
-            <div class="bg-body-extra-light">
+            <!-- <div class="bg-body-extra-light">
                 <div class="content content-full">
                     <div class="pt-7 pb-5">
                         <div class="position-relative">
@@ -295,8 +295,7 @@
                                         </div>
                                     </a>
                                 </div>
-
-                                <!-- 
+ 
                                 <div class="p-3 invisible" data-toggle="appear" data-class="animated flipInX">
                                     <a class="block block-rounded bg-gd-primary text-center" href="https://github.com/hanhan1310">
                                         <div class="block-content block-content-full bg-gd-sea">
@@ -348,12 +347,11 @@
                                         </div>
                                     </a>
                                 </div> 
-                                -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- END Section 2 -->
         </main>
         <!-- END Main Container -->
@@ -408,7 +406,8 @@
                 <!-- Footer Copyright -->
                 <div class="row fs-sm pt-4">
                     <div class="col-md-6 offset-md-3 text-center">
-                        Copyright © 2024 HAU Test. All rights reserved.
+                        <!-- Copyright © 2025 HAU Test. All rights reserved. -->
+                        Copyright © <span data-toggle="year-copy"></span> HAU Test. All rights reserved.
                     </div>
                 </div>
                 <!-- END Footer Copyright -->

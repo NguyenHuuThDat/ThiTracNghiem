@@ -6665,7 +6665,7 @@ CREATE TABLE `nguoidung` (
 --
 
 INSERT INTO `nguoidung` (`email`, `id`, `googleid`, `hoten`, `gioitinh`, `ngaysinh`, `avatar`, `ngaythamgia`, `matkhau`, `trangthai`, `sodienthoai`, `token`, `otp`, `manhomquyen`) VALUES
-('nguyetnt@hau.edu.vn', '111111', NULL, 'Nguyễn Thị Nguyệt', 0, '1991-08-17', NULL, '2024-11-30', '$2y$10$3qZEGIyBG8g/UYXpPGzQLuAUydxjCT3.W.GOozN7NC6q0KirzNrLa', 1, NULL, '1735432924$2y$10$.WQqCEteR8z1564.K6GjUOlo.4Bon0SbfpLXAOfcPbuW8C5esbf8a', NULL, 10),
+('admin1@gmail.com', '111111', NULL, 'Admin1', 0, '1991-08-17', NULL, '2024-11-30', '$2y$10$3qZEGIyBG8g/UYXpPGzQLuAUydxjCT3.W.GOozN7NC6q0KirzNrLa', 1, NULL, '1735432924$2y$10$.WQqCEteR8z1564.K6GjUOlo.4Bon0SbfpLXAOfcPbuW8C5esbf8a', NULL, 10),
 ('vuhoangan12102003@gmail.com', '2155010002', NULL, 'Vũ Hoàng An', 1, '2003-01-01', NULL, '2024-12-29', '$2y$10$K9d5.xAew.OTbW4Cp2v9x.C7zbws/LIfwQMWmdbSoXqBscQ6uK9DK', 1, NULL, NULL, NULL, 11),
 ('', '2155010007', NULL, 'Lê Việt Anh', 1, '2003-01-01', NULL, '2024-12-29', '$2y$10$pH7DoQzgmVM6c65YDKqNgewUpWm48CL3.U5z5Pwez5hZU.5KLLbna', 1, NULL, NULL, NULL, 11),
 ('', '2155010012', NULL, 'Nguyễn Mai Anh', 0, '2003-01-01', NULL, '2024-12-29', '$2y$10$66iPpmQDi7wkMDIrOS0o2eBs0p9wK1ldIwxjJ767M3wES9TyIn5t6', 1, NULL, NULL, NULL, 11),
