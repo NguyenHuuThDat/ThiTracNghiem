@@ -233,7 +233,7 @@
                     </div>
                 </div>
 
-                <div class="content content-full">
+                <!-- <div class="content content-full">
                     <div class="row">
                         <div class="order-md-1 col-md-6 d-flex align-items-center justify-content-center">
                             <img src="./public/media/various/landing_3.png" alt="" class="feature__img invisible" data-toggle="appear" data-class="animated fadeInRight">
@@ -265,7 +265,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- <div class="bg-body-extra-light">
