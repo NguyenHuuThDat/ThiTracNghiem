@@ -1,11 +1,9 @@
-# Đồ án Phát triển Phần mềm Hướng dịch vụ
-
 ### Hướng dẫn cài đặt
 - Cài đặt XAMPP >= 8.0.25, Composer (mặc định là phiên bản mới nhất)
 - Clone source code về thư mục htdocs của XAMPP
-- Chạy XAMPP, tạo 1 database mới có tên là " thitracnghiem ", sau đó import code sql của file database vào để tránh gặp lỗi
+- Chạy XAMPP, tạo 1 database mới có tên là "thitracnghiem", sau đó import code sql của file database vào để tránh gặp lỗi
 - Cấu hình thông tin database và đường dẫn trang chủ tại file config.php
-- Cài đặt thư viện cần thiết: mở terminal nhập " composer install "
+- Cài đặt thư viện cần thiết: mở terminal nhập "composer install"
 - Nếu gặp lỗi trong quá trình cài thư viện composer, mở file php.ini trong /xampp/php/
 Tìm và mở khóa các dòng extension=gd, extension=zip (nếu có) bằng cách xóa dấu ;
 Lưu lại và chạy lại lệnh composer install
@@ -47,4 +45,5 @@ b. Đề thi tự động (Giảng viên chỉ cần nhập số lượng câu h
 20. Sinh viên có thể xem lại bài thi của mình (khi cấu hình đề thi cho phép xem).
 21. Thống kê điểm số của sinh viên tham gia đề thi.
 22. Lọc sinh viên đã tham gia, chưa tham gia thi hoặc đã thi xong.
+
 23. Sắp xếp theo tên, điểm số của sinh viên ở từng đề kiểm tra.
