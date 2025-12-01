@@ -4,7 +4,7 @@
             <div class="p-3 w-100">
                 <div class="mb-3 text-center">
                     <a class="link-fx fw-bold fs-1" href="#">
-                        <span class="text-dark">HAU </span><span class="text-primary">Test</span>
+                        <span class="text-dark">Smart </span><span class="text-primary">Test</span>
                     </a>
                     <p class="text-uppercase fw-bold fs-sm text-muted">Đăng nhập</p>
                 </div>
@@ -14,7 +14,7 @@
                         <form class="js-validation-signin">
                             <div class="py-3">
                                 <div class="mb-4">
-                                    <input type="text" class="form-control form-control-lg form-control-alt" id="login-username" name="login-username" placeholder="Mã sinh viên">
+                                    <input type="text" class="form-control form-control-lg form-control-alt" id="login-username" name="login-username" placeholder="Tên đăng nhập">
                                 </div>
 
                                 <div class="mb-4">
@@ -27,11 +27,11 @@
                                     <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Đăng nhập
                                 </button>
                                 
-                                <a class="btn btn-alt-secondary me-1 my-3 w-100" href="<?php echo $data["authUrl"]?>">
+                                <!-- <a class="btn btn-alt-secondary me-1 my-3 w-100" href="<?php echo $data["authUrl"]?>">
                                     <img alt="Logo" src="./public/media/svg/google-icon.svg" style="height:15px;margin-right:20px">Đăng nhập với Google
                                 </a>
 
-                                <!-- <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
+                                <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
                                     <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="./auth/recover">
                                         <i class="fa fa-exclamation-triangle opacity-50 me-1"></i> Quên mật khẩu
                                     </a>
@@ -49,7 +49,7 @@
         <div class="hero-static col-md-6 d-none d-md-flex align-items-md-center justify-content-md-center text-md-center">
             <div class="p-3">
                 <p class="display-4 fw-bold text-white mb-3">
-                    Welcome to HAU Test
+                    Welcome to Smart Test
                 </p>
 
                 <p class="fs-lg fw-semibold text-white-75 mb-0">

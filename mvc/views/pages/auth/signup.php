@@ -8,7 +8,7 @@
                     <!-- Header -->
                     <div class="mb-2 text-center">
                         <a class="link-fx fw-bold fs-1" href="#">
-                            <span class="text-dark">OnTest</span><span class="text-primary">VN</span>
+                            <span class="text-dark">SmartTest</span><span class="text-primary">VN</span>
                         </a>
                         <p class="text-uppercase fw-bold fs-sm text-muted">Tạo tài khoản mới</p>
                     </div>

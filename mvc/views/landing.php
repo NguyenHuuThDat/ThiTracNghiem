@@ -9,7 +9,7 @@
                 <div class="space-x-1 d-flex align-items-center space-x-2 animated zoomInRight">
                     <a class="link-fx fw-bold" href="home">
                         <i class="fa fa-fire text-primary"></i>
-                        <span class="fs-4 text-dual">HAU </span><span class="fs-4 text-primary">Test</span>
+                        <span class="fs-4 text-dual">Smart </span><span class="fs-4 text-primary">Test</span>
                     </a>
                 </div>
 
@@ -407,7 +407,7 @@
                 <div class="row fs-sm pt-4">
                     <div class="col-md-6 offset-md-3 text-center">
                         <!-- Copyright © 2025 HAU Test. All rights reserved. -->
-                        Copyright © <span data-toggle="year-copy"></span> HAU Test. All rights reserved.
+                        Copyright © <span data-toggle="year-copy"></span> Smart Test. All rights reserved.
                     </div>
                 </div>
                 <!-- END Footer Copyright -->
