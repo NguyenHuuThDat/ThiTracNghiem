@@ -406,7 +406,6 @@
                 <!-- Footer Copyright -->
                 <div class="row fs-sm pt-4">
                     <div class="col-md-6 offset-md-3 text-center">
-                        <!-- Copyright © 2025 HAU Test. All rights reserved. -->
                         Copyright © <span data-toggle="year-copy"></span> Smart Test. All rights reserved.
                     </div>
                 </div>

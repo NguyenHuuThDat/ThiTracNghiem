@@ -7,10 +7,10 @@
             <!-- Logo -->
             <a class="fw-semibold text-white tracking-wide" href="./">
                 <span class="smini-visible">
-                    <span class="opacity-75">HAU</span>
+                    <span class="opacity-75">Smart</span>
                 </span>
                 <span class="smini-hidden">
-                    <span class="opacity-75">HAU</span> Test
+                    <span class="opacity-75">Smart</span> Test
                 </span>
             </a>
             <!-- END Logo -->
