@@ -5,20 +5,8 @@
 - Cấu hình thông tin database và đường dẫn trang chủ tại file config.php
 - Cài đặt thư viện cần thiết: mở terminal nhập "composer install"
 - Nếu gặp lỗi trong quá trình cài thư viện composer, mở file php.ini trong /xampp/php/
-Tìm và mở khóa các dòng extension=gd, extension=zip (nếu có) bằng cách xóa dấu ;
-Lưu lại và chạy lại lệnh composer install
-
-### Tài khoản Admin
-- Username: 3121410422
-- Password: 123456
-
-### Tài khoản Giảng Viên
-- Username: 111111
-- Password: 123456
-
-### Tài khoản Sinh Viên
-- Username: 2155010067
-- Password: 123456
+- Tìm và mở khóa các dòng extension=gd, extension=zip (nếu có) bằng cách xóa dấu ;
+- Lưu lại và chạy lại lệnh composer install
 
 ### Chức năng
 1. Landing page giới thiệu hệ thống.
@@ -45,5 +33,4 @@ b. Đề thi tự động (Giảng viên chỉ cần nhập số lượng câu h
 20. Sinh viên có thể xem lại bài thi của mình (khi cấu hình đề thi cho phép xem).
 21. Thống kê điểm số của sinh viên tham gia đề thi.
 22. Lọc sinh viên đã tham gia, chưa tham gia thi hoặc đã thi xong.
-
 23. Sắp xếp theo tên, điểm số của sinh viên ở từng đề kiểm tra.
